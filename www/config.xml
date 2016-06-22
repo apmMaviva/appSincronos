@@ -6,7 +6,8 @@
 	
 	<allow-navigation href="*" />
     <allow-intent href="*" />
-    <access origin="*" />
+    <access origin="http://192.168.201.138/pistolas" />
+	<access origin="*" />
 
 	<gap:plugin name="com.phonegap.plugins.barcodescanner"/>
 	<gap:plugin name="org.apache.cordova.dialogs"/>
