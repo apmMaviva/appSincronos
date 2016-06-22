@@ -33,7 +33,7 @@
 		
     </head>
     <body>
-		<div class="entrarpistola" onclick="window.open('http://192.168.201.138/pistolas', '_self', 'location=no');">ENTRAR MENU PISTOLAS</div>
+		<div class="entrarpistola" onclick="cordova.InAppBrowser.open('http://192.168.201.138/pistolas', '_self', 'location=no');">ENTRAR MENU PISTOLAS</div>
 		<div class="salirpistola" onclick="navigator.app.exitApp();">SALIR APLICACION</div>
     </body>
 	
@@ -45,6 +45,7 @@
 			
 			function onDeviceReady() {
 				alert("Estoy listo");
+				window.open = cordova.InAppBrowser.open;
 			} 
 
 			function onBackKeyDown() {
