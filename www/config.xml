@@ -9,7 +9,8 @@
     <access origin="*" />
 
 	<gap:plugin name="com.phonegap.plugins.barcodescanner"/>
-	<gap:plugin name="org.apache.cordova.dialogs"/>  	
+	<gap:plugin name="org.apache.cordova.dialogs"/>
+	<gap:plugin name="org.apache.cordova.core.inappbrowser" />  	
 
     <feature name="http://api.phonegap.com/1.0/device" />
     <feature name="debug-server" required="true">
