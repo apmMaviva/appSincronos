@@ -33,9 +33,8 @@
 		
     </head>
     <body>
-		<div class="entrarpistola" onclick="navigator.app.loadUrl('http://192.168.201.138/pistolas', { openExternal: true });">ENTRAR MENU PISTOLAS</div>
-		<!--<div class="salirpistola" onclick="window.open('http://elmundo.es', '_system', 'location=yes'); return false;">SALIR APLICACION</div>-->
-		<a href="http://192.168.201.138/pistolas"><div class="salirpistola">SALIR APLICACION</div> 
+		<div class="entrarpistola" onclick="navigator.app.loadUrl('http://192.168.201.138/pistolas', { openExternal: false });">ENTRAR MENU PISTOLAS</div>
+		<div class="salirpistola" onclick="navigator.app.exitApp();">SALIR APLICACION</div>
     </body>
 	
 	<script type="text/javascript">
