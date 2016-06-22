@@ -3,6 +3,8 @@
 	<description>Aplicacion Pistolas Maviva</description>
 	<author href="http://www.grupomaviva.es" email="informatica@grupomaviva.es">App Pistolas</author>
 	<content src="index.html"/>
+	
+	<access origin="*" />
 
 	<gap:plugin name="com.phonegap.plugins.barcodescanner"/>
 	<gap:plugin name="org.apache.cordova.dialogs"/>  	
