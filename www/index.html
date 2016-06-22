@@ -33,7 +33,22 @@
 		
     </head>
     <body>
-		<div class="entrarpistola" onclick="var ref = window.open('http://192.168.201.138/pistolas/login.aspx', '_blank', 'location=yes');">ENTRAR MENU PISTOLAS</div>
+		<div class="entrarpistola" onclick="var ref = window.open('http://192.168.201.138/pistolas/login.aspx', '_self', 'location=no');">ENTRAR MENU PISTOLAS</div>
 		<div class="salirpistola" onclick="navigator.app.exitApp();">SALIR APLICACION</div>
     </body>
+	
+	<script type="text/javascript">
+	
+			document.addEventListener("deviceready", onDeviceReady, false);
+				
+			document.addEventListener("backbutton", onBackKeyDown, false);
+			
+			function onDeviceReady() {
+				alert("Estoy listo");
+			} 
+
+			function onBackKeyDown() {
+				navigator.app.exitApp();
+			}			
+	
 </html>

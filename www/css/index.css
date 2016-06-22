@@ -52,6 +52,8 @@ body {
 	font-size:3em;
 	font-weight:bold;
 	font-family:calibri;
+text-align: center;
+padding: 10% 0;	
 }
 .salirpistola {
 	margin: 10%;
@@ -62,4 +64,6 @@ body {
 	font-size:3em;
 	font-weight:bold;
 	font-family:calibri;
+text-align: center;
+padding: 10% 0;	
 }
