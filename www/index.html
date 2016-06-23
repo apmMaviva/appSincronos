@@ -47,6 +47,7 @@
 			}
 			
 			function entrarProgramaPistola() {
+				alert("Entra OK");
 				window.open = cordova.InAppBrowser.open;
 				var ref = window.open('http://192.168.201.138/pistolas', '_self', 'location=no');
 				ref.addEventListener('exit', function () {
