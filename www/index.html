@@ -34,22 +34,25 @@
     </head>
     <body>
 		<!--<div class="entrarpistola" onclick="navigator.app.loadUrl('http://192.168.201.138/pistolas', { openExternal: true });">ENTRAR MENU PISTOLAS</div>-->
-		<div class="entrarpistola" onclick="window.open('http://192.168.201.138/pistolas','_self', 'location=no');">ENTRAR MENU PISTOLAS</div>
-		<div class="salirpistola" onclick="navigator.app.exitApp();">SALIR APLICACION</div>
+		<div class="entrarpistola" onclick="entrarProgramaPistola();">ENTRAR MENU PISTOLAS</div>
+		<div class="salirpistola" onclick="onBackKeyDown();">SALIR APLICACION</div>
     </body>
 	
 	<script type="text/javascript">
 	
-			document.addEventListener("deviceready", onDeviceReady, false);
-				
 			document.addEventListener("backbutton", onBackKeyDown, false);
 			
-			function onDeviceReady() {
-				alert("Estoy listo");
-			} 
-
 			function onBackKeyDown() {
 				navigator.app.exitApp();
-			}			
+			}
+			
+			function entrarProgramaPistola() {
+				window.open = cordova.InAppBrowser.open;
+				var ref = window.open('http://192.168.201.138/pistolas', '_self', 'location=no');
+				ref.addEventListener('exit', function () {
+					navigator.app.exitApp();
+				});				
+			}
+                
 	</script>
 </html>
