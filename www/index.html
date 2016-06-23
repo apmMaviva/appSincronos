@@ -45,7 +45,9 @@
 			document.addEventListener("backbutton", onBackKeyDown, false);
 			
 			function onBackKeyDown() {
-				navigator.app.exitApp();
+				if (confirm('Confirma que desea salir de la aplicación?')) {
+					navigator.app.exitApp();
+				}	
 			}
 			
             
