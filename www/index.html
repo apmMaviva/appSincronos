@@ -74,13 +74,15 @@
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
-									alert("Lectura CANCELADA");
+//									alert("Lectura CANCELADA");
+									document.cookie = "cola_salida_lectura=CANCELADO";
 								}
 								else {
-									alert("Lectura OK, " + result.text);
+//									alert("Lectura OK, " + result.text);
+									document.cookie = "cola_salida_lectura=" + result.text;
 								} 
 
-								/*
+/*
 								alert("We got a barcode\n" + 
 								"Result: " + result.text + "\n" + 
 								"Format: " + result.format + "\n" + 
@@ -90,6 +92,8 @@
 									window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
 								}
 								*/
+								
+								document.cookie = "cola_orden_lectura=false; expires=Thu, 01 Jan 2030 00:00:00 UTC";								
 
 							}, function (error) { 
 								alert("Se ha producido un error de lectura"); 
