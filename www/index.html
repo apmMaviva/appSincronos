@@ -43,6 +43,8 @@
 	<script type="text/javascript">
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
+
+			setTimeout( chequeaCookie, 2000);
 			
 			function onBackKeyDown() {
 				if (confirm('Confirma que desea salir de la aplicación?')) {
@@ -50,6 +52,49 @@
 				}	
 			}
 			
-            
+			function chequeaCookie() {
+				var lista = document.cookie.split(';');
+				var micookie = false;
+				for (i in lista) {
+					var busca = lista[i].search('cola_orden_lectura');
+					if (busca > -1) {micookie=true;}
+				}
+//				if (micookie) {
+					document.cookie = "cola_orden_lectura=false; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+					scan();
+//				}
+								
+			}
+
+			function scan() {
+
+				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+//				alert("Scan: paso " + pasoSincrono + " y " + procesaCarro);
+				
+				scanner.scan( function (result) { 
+
+								if (result.cancelled) {
+									alert("Lectura CANCELADA");
+								}
+								else {
+									alert("Lectura OK, " + result.text);
+								} 
+
+								/*
+								alert("We got a barcode\n" + 
+								"Result: " + result.text + "\n" + 
+								"Format: " + result.format + "\n" + 
+								"Cancelled: " + result.cancelled);  
+
+								if (args.format == "QR_CODE") {
+									window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
+								}
+								*/
+
+							}, function (error) { 
+								alert("Se ha producido un error de lectura"); 
+							} );	
+
+			}            
 	</script>
 </html>
