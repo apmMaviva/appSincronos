@@ -35,8 +35,7 @@
     </head>
     <body>
 		
-		<div style="width:100%;height:100%;padding:1%;">
-			<iframe frameborder="0" style="width:98%;height:98%;" src="http://192.168.201.138/pistolas">No funciona si se ve esto</iframe>
+		<div id="zonaFrame" style="width:100%;height:100%;padding:1%;">
 		</div>
 		
 		<div id="varsession">
@@ -45,36 +44,50 @@
     </body>
 	
 	<script type="text/javascript">
+			
+			var numSerie;
+			
+			document.addEventListener("deviceready", InitSerial, false);
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
 			
 			document.addEventListener("menubutton", LeerBarcode, false);
 			
-		
+
+/* Si pulsa boton atrás se pregunta si quiere cerrar la APP */			
 			function onBackKeyDown() {
 				navigator.notification.confirm( "¿Deseas cerrar la aplicación?", 
 					function (button) {
-					  if (button==2) {
-						navigator.app.exitApp();
-					  }
-					}
-					,
-					"EXIT",
-					["No","Si"]
+						if (button==2) {
+							navigator.app.exitApp();
+						}
+					},
+					"SALIR",
+					["NO","SI"]
 				);
 			}
 
 			
-			function entrarProgramaPistola() {
-				window.open = cordova.InAppBrowser.open;
-				var ref = window.open('http://192.168.201.138/pistolas', '_self', 'location=no');
-				ref.addEventListener('exit', function () {
-					navigator.app.exitApp();
-				});				
+/* Se inicia la aplicación, necesito darle un numero de serie unico para mandar las lecturas de BARCODES a la BBDD con este ID */			
+			function InitSerial() {
+			
+				numSerie = "";
+				var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			
+				for( var i=0; i < 12; i++ )
+					numSerie += possible.charAt(Math.floor(Math.random() * possible.length));
+
+				alert("Mi ID es " + numSerie);
+				
+				var url = "http://192.168.201.138/pistolas/login.aspx?serial=" + numSerie;
+				var contenido = '<iframe frameborder="0" style="width:98%;height:98%;" src="' + url + '">No funciona si se ve esto</iframe>';
+				
+				$('#zonaFrame').html(contenido);
+
 			}
             
 			
-/**** ESCANEO BARCODE ****/			
+/* ESCANEO BARCODE, activa el lector y  */			
 			function LeerBarcode() {
 
 				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -84,6 +97,7 @@
 
 								if (result.cancelled) {
 									alert("Lectura CANCELADA");
+									$("#varsession").load('http://192.168.201.138/pistolas/guardabarcode.aspx?');
 								}
 								else {
 									alert("Lectura OK, " + result.text);
