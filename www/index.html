@@ -43,29 +43,38 @@
 	<script type="text/javascript">
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
-
+			
+			document.addEventListener("deviceready", activarCookieApp, false);
+			
 			setTimeout( chequeaCookie, 2000);
 			
 			function onBackKeyDown() {
-				if (confirm('Confirma que desea salir de la aplicación?')) {
-					navigator.app.exitApp();
-				}	
-			}
-			
-			function chequeaCookie() {
-				var lista = document.cookie.split(';');
-				var micookie = false;
-				for (i in lista) {
-					var busca = lista[i].search('cola_orden_lectura');
-					if (busca > -1) {micookie=true;}
-				}
-				if (micookie) {
-					document.cookie = "cola_orden_lectura=false; expires=Thu, 01 Jan 1970 00:00:00 UTC";
-					scan();
-				}
-								
+				navigator.app.exitApp();
 			}
 
+			function activarCookieApp() {
+				createCookie('modoApp',true,1);
+			}
+			
+			function entrarProgramaPistola() {
+				window.open = cordova.InAppBrowser.open;
+				var ref = window.open('http://192.168.201.138/pistolas', '_self', 'location=no');
+				ref.addEventListener('exit', function () {
+					navigator.app.exitApp();
+				});				
+			}
+            
+			function chequeaCookie() {
+				var lista = document.cookie.split(';');
+				var micookie = readCookie('colalectura');
+				if (micookie!=false) {
+					eraseCookie('colalectura');
+					scan();
+				}
+	
+			}
+
+/**** ESCANEO BARCODE ****/			
 			function scan() {
 
 				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
@@ -74,15 +83,15 @@
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
-//									alert("Lectura CANCELADA");
-									document.cookie = "cola_salida_lectura=CANCELADO";
+	//								alert("Lectura CANCELADA");
+									createCookie('resultadolectura','CANCELADA',1);
 								}
 								else {
-//									alert("Lectura OK, " + result.text);
-									document.cookie = "cola_salida_lectura=" + result.text;
+	//								alert("Lectura OK, " + result.text);
+									createCookie('resultadolectura',result.text,1);
 								} 
 
-/*
+								/*
 								alert("We got a barcode\n" + 
 								"Result: " + result.text + "\n" + 
 								"Format: " + result.format + "\n" + 
@@ -92,13 +101,38 @@
 									window.plugins.childBrowser.showWebPage(args.text, { showLocationBar: false });
 								}
 								*/
-								
-								document.cookie = "cola_orden_lectura=false; expires=Thu, 01 Jan 2030 00:00:00 UTC";								
 
 							}, function (error) { 
-								alert("Se ha producido un error de lectura"); 
+	//							alert("Se ha producido un error de lectura"); 
+								createCookie('resultadolectura','ERROR',1);
 							} );	
 
-			}            
+			}
+
+/**** GESTION DE COOKIES ****/			
+			function createCookie(name,value,days) {
+				if (days) {
+					var date = new Date();
+					date.setTime(date.getTime()+(days*24*60*60*1000));
+					var expires = "; expires="+date.toGMTString();
+				}
+				else var expires = "";
+				document.cookie = name+"="+value+expires+"; path=/";
+			}
+
+			function readCookie(name) {
+				var nameEQ = name + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0;i < ca.length;i++) {
+					var c = ca[i];
+					while (c.charAt(0)==' ') c = c.substring(1,c.length);
+					if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+				}
+				return false;
+			}
+
+			function eraseCookie(name) {
+				createCookie(name,"",-1);
+			}				
 	</script>
 </html>
