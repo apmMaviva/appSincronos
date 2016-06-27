@@ -48,22 +48,22 @@
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
 			
-			document.addEventListener("deviceready", activarCookieApp, false);
+			document.addEventListener("menubutton", LeerBarcode, false);
 			
-			guardarItem('modoApp',1);
-			
-			setTimeout( chequeaLectura, 2000);
-			
+		
 			function onBackKeyDown() {
-				navigator.app.exitApp();
+				navigator.notification.confirm( "¿Deseas cerrar la aplicación?", 
+					function (button) {
+					  if (button==2) {
+						navigator.app.exitApp();
+					  }
+					}
+					,
+					"EXIT",
+					["No","Si"]
+				);
 			}
 
-			function activarCookieApp() {
-				guardarItem('modoApp',1);
-				return false;
-/*				localStorage.setItem('ordenlectura',0);
-				localStorage.setItem('resultadolectura','');*/
-			}
 			
 			function entrarProgramaPistola() {
 				window.open = cordova.InAppBrowser.open;
@@ -73,53 +73,9 @@
 				});				
 			}
             
-			function chequeaLectura() {
-				var micookie = localStorage.getItem('ordenlectura');
-				if (micookie>0) {
-					localStorage.setItem('ordenlectura',0);
-					scan();
-				}
-	
-			}
-
-/**** ALMACENAMIENTO DE VARIABLES PARA INTERCAMBIAR CON LA APLICACION ****/
-			function guardarItem(nombre,valor) {
-
-				$.ajax({
-					type: "GET",
-					url: "http://192.168.201.138/pistolas/Webapp.asmx/HelloWorld",
-					data: {"nombre": "Antonio"}, // the data in form-encoded format, ie as it would appear on a querystring
-					//contentType: "application/x-www-form-urlencoded; charset=UTF-8", // if you are using form encoding, this is default so you don't need to supply it
-					dataType: "text", // the data type we want back, so text.  The data will come wrapped in xml
-					success: function (data) {
-						alert("Recibo " + data); // show the string that was returned, this will be the data inside the xml wrapper
-					},
-					crossDomain: true,
-					error: function (jqXHR, exception) {
-						var msg = '';
-						if (jqXHR.status === 0) {
-							msg = 'Not connect.\n Verify Network.';
-						} else if (jqXHR.status == 404) {
-							msg = 'Requested page not found. [404]';
-						} else if (jqXHR.status == 500) {
-							msg = 'Internal Server Error [500].';
-						} else if (exception === 'parsererror') {
-							msg = 'Requested JSON parse failed.';
-						} else if (exception === 'timeout') {
-							msg = 'Time out error.';
-						} else if (exception === 'abort') {
-							msg = 'Ajax request aborted.';
-						} else {
-							msg = 'Uncaught Error.\n' + jqXHR.responseText;
-						}
-						alert("Error " + msg);
-					}
-				});
-				
-			}			
 			
 /**** ESCANEO BARCODE ****/			
-			function scan() {
+			function LeerBarcode() {
 
 				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 //				alert("Scan: paso " + pasoSincrono + " y " + procesaCarro);
@@ -127,12 +83,10 @@
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
-	//								alert("Lectura CANCELADA");
-									localStorage.setItem('resultadolectura','CANCELADA');
+									alert("Lectura CANCELADA");
 								}
 								else {
-	//								alert("Lectura OK, " + result.text);
-									localStorage.setItem('resultadolectura',result.text);
+									alert("Lectura OK, " + result.text);
 								} 
 
 								/*
@@ -147,8 +101,7 @@
 								*/
 
 							}, function (error) { 
-	//							alert("Se ha producido un error de lectura"); 
-								localStorage.setItem('resultadolectura','ERROR');
+								alert("Se ha producido un error de lectura"); 
 							} );	
 
 			}
