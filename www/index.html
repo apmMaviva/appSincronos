@@ -18,7 +18,7 @@
      KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
--->
+--> 
 <html>
     <head>
         <meta charset="utf-8" />
@@ -38,6 +38,9 @@
 			<iframe frameborder="0" style="width:98%;height:98%;" src="http://192.168.201.138/pistolas">No funciona si se ve esto</iframe>
 		</div>
 		
+		<div id="varsession">
+		</div>
+		
     </body>
 	
 	<script type="text/javascript">
@@ -53,7 +56,7 @@
 			}
 
 			function activarCookieApp() {
-				localStorage.setItem('modoApp',1);
+				guardarItem('modoApp',1);
 				localStorage.setItem('ordenlectura',0);
 				localStorage.setItem('resultadolectura','');
 			}
@@ -75,6 +78,22 @@
 	
 			}
 
+/**** ALMACENAMIENTO DE VARIABLES PARA INTERCAMBIAR CON LA APLICACION ****/
+			function guardarItem(nombre,valor) {
+	
+				$.ajax({
+					type: "POST",
+					url: "http://192.168.201.138/pistolas/Webapp.asmx/HelloWorld",
+					data: "nombre=Antonio", // the data in form-encoded format, ie as it would appear on a querystring
+					//contentType: "application/x-www-form-urlencoded; charset=UTF-8", // if you are using form encoding, this is default so you don't need to supply it
+					dataType: "text", // the data type we want back, so text.  The data will come wrapped in xml
+					success: function (data) {
+						alert("Recibo " + data); // show the string that was returned, this will be the data inside the xml wrapper
+				}
+            });
+				
+			}			
+			
 /**** ESCANEO BARCODE ****/			
 			function scan() {
 
