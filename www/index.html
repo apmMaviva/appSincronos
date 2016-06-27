@@ -28,7 +28,8 @@
 		<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
         <script type="text/javascript" src="cordova.js"></script>
-		
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>		
         <title>Maviva App Pistolas</title>
 		
     </head>
@@ -49,6 +50,8 @@
 			
 			document.addEventListener("deviceready", activarCookieApp, false);
 			
+			guardarItem('modoApp',1);
+			
 			setTimeout( chequeaLectura, 2000);
 			
 			function onBackKeyDown() {
@@ -57,8 +60,9 @@
 
 			function activarCookieApp() {
 				guardarItem('modoApp',1);
-				localStorage.setItem('ordenlectura',0);
-				localStorage.setItem('resultadolectura','');
+				return false;
+/*				localStorage.setItem('ordenlectura',0);
+				localStorage.setItem('resultadolectura','');*/
 			}
 			
 			function entrarProgramaPistola() {
@@ -80,17 +84,37 @@
 
 /**** ALMACENAMIENTO DE VARIABLES PARA INTERCAMBIAR CON LA APLICACION ****/
 			function guardarItem(nombre,valor) {
-	
+
 				$.ajax({
-					type: "POST",
+					type: "GET",
 					url: "http://192.168.201.138/pistolas/Webapp.asmx/HelloWorld",
-					data: "nombre=Antonio", // the data in form-encoded format, ie as it would appear on a querystring
+					data: {"nombre": "Antonio"}, // the data in form-encoded format, ie as it would appear on a querystring
 					//contentType: "application/x-www-form-urlencoded; charset=UTF-8", // if you are using form encoding, this is default so you don't need to supply it
 					dataType: "text", // the data type we want back, so text.  The data will come wrapped in xml
 					success: function (data) {
 						alert("Recibo " + data); // show the string that was returned, this will be the data inside the xml wrapper
-				}
-            });
+					},
+					crossDomain: true,
+					error: function (jqXHR, exception) {
+						var msg = '';
+						if (jqXHR.status === 0) {
+							msg = 'Not connect.\n Verify Network.';
+						} else if (jqXHR.status == 404) {
+							msg = 'Requested page not found. [404]';
+						} else if (jqXHR.status == 500) {
+							msg = 'Internal Server Error [500].';
+						} else if (exception === 'parsererror') {
+							msg = 'Requested JSON parse failed.';
+						} else if (exception === 'timeout') {
+							msg = 'Time out error.';
+						} else if (exception === 'abort') {
+							msg = 'Ajax request aborted.';
+						} else {
+							msg = 'Uncaught Error.\n' + jqXHR.responseText;
+						}
+						alert("Error " + msg);
+					}
+				});
 				
 			}			
 			
