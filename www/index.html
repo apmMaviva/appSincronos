@@ -46,15 +46,16 @@
 			
 			document.addEventListener("deviceready", activarCookieApp, false);
 			
-			setTimeout( chequeaCookie, 2000);
+			setTimeout( chequeaLectura, 2000);
 			
 			function onBackKeyDown() {
 				navigator.app.exitApp();
 			}
 
 			function activarCookieApp() {
-			alert("entrada APP");
-				createCookie('modoApp',true,1);
+				localStorage.setItem('modoApp',1);
+				localStorage.setItem('ordenlectura',0);
+				localStorage.setItem('resultadolectura','');
 			}
 			
 			function entrarProgramaPistola() {
@@ -65,11 +66,10 @@
 				});				
 			}
             
-			function chequeaCookie() {
-				var lista = document.cookie.split(';');
-				var micookie = readCookie('colalectura');
-				if (micookie!=false) {
-					eraseCookie('colalectura');
+			function chequeaLectura() {
+				var micookie = localStorage.getItem('ordenlectura');
+				if (micookie>0) {
+					localStorage.setItem('ordenlectura',0);
 					scan();
 				}
 	
@@ -85,11 +85,11 @@
 
 								if (result.cancelled) {
 	//								alert("Lectura CANCELADA");
-									createCookie('resultadolectura','CANCELADA',1);
+									localStorage.setItem('resultadolectura','CANCELADA');
 								}
 								else {
 	//								alert("Lectura OK, " + result.text);
-									createCookie('resultadolectura',result.text,1);
+									localStorage.setItem('resultadolectura',result.text);
 								} 
 
 								/*
@@ -105,35 +105,10 @@
 
 							}, function (error) { 
 	//							alert("Se ha producido un error de lectura"); 
-								createCookie('resultadolectura','ERROR',1);
+								localStorage.setItem('resultadolectura','ERROR');
 							} );	
 
 			}
-
-/**** GESTION DE COOKIES ****/			
-			function createCookie(name,value,days) {
-				if (days) {
-					var date = new Date();
-					date.setTime(date.getTime()+(days*24*60*60*1000));
-					var expires = "; expires="+date.toGMTString();
-				}
-				else var expires = "";
-				document.cookie = name+"="+value+expires+"; path=/";
-			}
-
-			function readCookie(name) {
-				var nameEQ = name + "=";
-				var ca = document.cookie.split(';');
-				for(var i=0;i < ca.length;i++) {
-					var c = ca[i];
-					while (c.charAt(0)==' ') c = c.substring(1,c.length);
-					if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-				}
-				return false;
-			}
-
-			function eraseCookie(name) {
-				createCookie(name,"",-1);
-			}				
+				
 	</script>
 </html>
