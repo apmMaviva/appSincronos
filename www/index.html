@@ -101,20 +101,20 @@
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
-									alert("Lectura CANCELADA");
+//									alert("Lectura CANCELADA");
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=CANCELADA';
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
-									alert("Lectura COMPLETADA");
-									setTimeout(validarLectura, 2000);
+//									alert("Lectura COMPLETADA");
+									setTimeout(validarLectura, 6000);
 								}
 								else {
-									alert("Lectura OK, " + result.text);
+//									alert("Lectura OK, " + result.text);
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
-									alert("Lectura COMPLETADA");
-									setTimeout(validarLectura, 2000);
+//									alert("Lectura COMPLETADA");
+									setTimeout(validarLectura, 6000);
 								} 
 
 								/*
@@ -129,12 +129,12 @@
 								*/
 
 							}, function (error) { 
-								alert("Se ha producido un error de lectura"); 
+//								alert("Se ha producido un error de lectura"); 
 								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
 								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 								$("#varsession").html(contenido);
-								alert("Lectura COMPLETADA");	
-								setTimeout(validarLectura, 2000);		
+//								alert("Lectura COMPLETADA");	
+								setTimeout(validarLectura, 6000);		
 							} );	
 
 			}
