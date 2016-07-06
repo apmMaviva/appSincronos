@@ -74,14 +74,14 @@
 				alert("Mi ID es " + numSerie);
 				
 				var url = "http://192.168.201.138/pistolas/login.aspx?serial=" + numSerie;
-				var contenido = '<iframe frameborder="0" style="width:98%;height:98%;" src="' + url + '">No funciona si se ve esto</iframe>';
+				var contenido = '<iframe frameborder="0" style="width:98%;height:98%;padding:1%;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 				
 				$('#zonaFrame').html(contenido);
 
-/*				setTimeout(validarLectura, 10000);*/
+				setTimeout(validarLectura, 10000);
 			}
             
-/*			
+			
 			function validarLectura() {
 			
 				if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
@@ -92,7 +92,7 @@
 				}
 				setTimeout(validarLectura, 10000);
 			}
-*/			
+			
 /* ESCANEO BARCODE, activa el lector y  */			
 			function LeerBarcode() {
 
