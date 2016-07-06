@@ -35,7 +35,7 @@
     </head>
     <body>
 		
-		<div id="zonaFrame" style="width:100%;height:100%;padding:1%;">
+		<div id="zonaFrame" style="width:100%;height:100%;padding:0%;margin:0%;">
 		</div>
 		
 		<div id="varsession" style="display:none;">
@@ -85,12 +85,11 @@
 			function validarLectura() {
 			
 				if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
-					alert("Encuentra orden lectura");
+					LeerBarcode();
 				}
 				else {
-					alert("No encuentra nada util");
-				}
-				setTimeout(validarLectura, 10000);
+					setTimeout(validarLectura, 2000);
+				}	
 			}
 			
 /* ESCANEO BARCODE, activa el lector y  */			
@@ -107,6 +106,7 @@
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
 									alert("Lectura COMPLETADA");
+									setTimeout(validarLectura, 2000);
 								}
 								else {
 									alert("Lectura OK, " + result.text);
@@ -114,6 +114,7 @@
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
 									alert("Lectura COMPLETADA");
+									setTimeout(validarLectura, 2000);
 								} 
 
 								/*
@@ -132,7 +133,8 @@
 								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
 								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 								$("#varsession").html(contenido);
-								alert("Lectura COMPLETADA");								
+								alert("Lectura COMPLETADA");	
+								setTimeout(validarLectura, 2000);		
 							} );	
 
 			}
