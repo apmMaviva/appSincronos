@@ -74,7 +74,13 @@
 				alert(JSON.stringify(tag));
 				alert(JSON.stringify(tipo));
 				alert(JSON.stringify(ndefMessage));
-				alert(nfc.bytesToString(ndefMessage[0].payload).substring(3));
+				
+				var mivalor = nfcEvent.tag.ndefMessage[0]["payload"];
+				var micadena = nfc.bytesToString(mivalor);
+				
+				
+				alert("T: " + mivalor);
+				alert("R: " + micadena);
 			}
 			function activadoNfcOk() {
 				alert("Activado NFC");
