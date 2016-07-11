@@ -51,6 +51,7 @@
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
 	
+			nfc.addTagDiscoveredListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
 
 /* Si pulsa boton atrás se pregunta si quiere cerrar la APP */			
 			function onBackKeyDown() {
@@ -65,13 +66,25 @@
 				);
 			}
 
+/* Funciones de gestión del NFC */
+			function LecturaNfc() {
+				var tag = nfcEvent.tag;
+				var tagId = nfc.bytesToHexString(tag.id);
+				alert("Leido tag " + tagId);
+			}
+			function activadoNfcOk() {
+				alert("Activado NFC");
+			}
+			function activadoNfcFail() {
+				alert("Error NFC no activado");
+			}			
 			
 /* Se inicia la aplicación, necesito darle un numero de serie unico para mandar las lecturas de BARCODES a la BBDD con este ID */			
 			function InitSerial() {
 
 				numSerie = device.uuid;	
 					
-				alert("Mi ID es " + numSerie);
+//				alert("Mi ID es " + numSerie);
 				
 				var url = "http://192.168.201.138/pistolas/login.aspx?serial=" + numSerie;
 				var contenido = '<iframe frameborder="0" style="width:98%!important;height:98%!important;margin:1%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
