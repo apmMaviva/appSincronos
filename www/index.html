@@ -35,6 +35,10 @@
     </head>
     <body>
 		
+		<div id="imagenNFC" style="display:none;">
+			<img src="img/nfc.jpg">
+		</div>	
+		
 		<div id="zonaFrame" style="width:100%;height:100%;padding:0%;margin:0%;">
 		</div>
 		
@@ -65,23 +69,7 @@
 				);
 			}
 
-/* Funciones de gestión del NFC */
-			function LecturaNfc(nfcEvent) {
-				alert("Salta la lectura NFC");
-				var tag = nfcEvent.tag,
-					ndefMessage = tag.ndefMessage;
-
-				alert(JSON.stringify(ndefMessage));
-
-				alert(nfc.bytesToString(ndefMessage[0].payload).substring(1));
-			}
-			function activadoNfcOk() {
-				alert("Activado NFC");
-			}
-			function activadoNfcFail() {
-				alert("Error NFC no activado");
-			}			
-			
+		
 /* Se inicia la aplicación, necesito darle un numero de serie unico para mandar las lecturas de BARCODES a la BBDD con este ID */			
 			function InitSerial() {
 
@@ -94,8 +82,6 @@
 				
 				$('#zonaFrame').html(contenido);
 
-				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
-				
 				setTimeout(validarLectura, 10000);
 			}
             
@@ -105,6 +91,9 @@
 				if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
 					LeerBarcode();
 				}
+				else if ($('#zonaFrame iframe').contents().find('.leer-nfc-android').length)   {
+					LeerNFC();
+				}				
 				else {
 					setTimeout(validarLectura, 2000);
 				}	
@@ -156,6 +145,48 @@
 							} );	
 
 			}
+
+// Activación del lector NFC
+			function LeerNFC() {
 				
+				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
+				$("#imagenNFC").show();
+				$("#zonaFrame").hide();
+			}
+
+			function LecturaNfc() {
+
+				var tag = nfcEvent.tag,
+					ndefMessage = tag.ndefMessage;
+
+				var contenido = nfc.bytesToString(ndefMessage[0].payload).substring(1);
+				
+				if (contenido.substr(0,2)=='es' || contenido.substr(0,2)=='ES' || contenido.substr(0,2)=='en' || contenido.substr(0,2)=='EN') {
+					contenido = contenido.substr(2);
+				} 
+
+				$("#imagenNFC").hide();
+				$("#zonaFrame").show();
+				
+				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
+				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
+				$("#varsession").html(contenido);
+				setTimeout(validarLectura, 6000);
+									
+			}
+			
+			function activadoNfcOk() {}
+			
+			function activadoNfcFail() {
+
+				$("#imagenNFC").hide();
+				$("#zonaFrame").show();
+				
+				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
+				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
+				$("#varsession").html(contenido);
+				setTimeout(validarLectura, 6000);					
+			}
+			
 	</script>
 </html>

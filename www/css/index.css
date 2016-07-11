@@ -55,3 +55,10 @@ padding: 10% 0;
 text-align: center;
 padding: 10% 0;	
 }
+#imagenNFC {
+	height:100%;
+	width:100%;
+}
+#imagenNFC img{
+	width:100%;
+}
