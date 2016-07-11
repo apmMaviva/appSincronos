@@ -67,9 +67,10 @@
 
 /* Funciones de gestión del NFC */
 			function LecturaNfc() {
+				alert("Salta la lectura NFC");
 				var tag = nfcEvent.tag;
 				var tagId = nfc.bytesToHexString(tag.id);
-				navigator.notification.alert(tagId);
+				
 			}
 			function activadoNfcOk() {
 				alert("Activado NFC");
