@@ -73,6 +73,7 @@
 				var tipo = nfcEvent.type;
 				alert(JSON.stringify(tag));
 				alert(JSON.stringify(tipo));
+				alert(JSON.stringify(ndefMessage));
 				alert(nfc.bytesToString(ndefMessage[0].payload).substring(3));
 			}
 			function activadoNfcOk() {
