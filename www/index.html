@@ -69,7 +69,7 @@
 			function LecturaNfc() {
 				var tag = nfcEvent.tag;
 				var tagId = nfc.bytesToHexString(tag.id);
-				alert("Leido tag " + tagId);
+				navigator.notification.alert(tagId);
 			}
 			function activadoNfcOk() {
 				alert("Activado NFC");
