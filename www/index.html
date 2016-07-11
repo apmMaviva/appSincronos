@@ -66,11 +66,11 @@
 			}
 
 /* Funciones de gestión del NFC */
-			function LecturaNfc() {
+			function LecturaNfc(nfcEvent) {
 				alert("Salta la lectura NFC");
 				var tag = nfcEvent.tag;
 				var tagId = nfc.bytesToHexString(tag.id);
-				
+				alert("tagId: " + tagId);
 			}
 			function activadoNfcOk() {
 				alert("Activado NFC");
