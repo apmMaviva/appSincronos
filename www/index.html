@@ -51,8 +51,7 @@
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
 	
-			nfc.addTagDiscoveredListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
-
+			
 /* Si pulsa boton atrás se pregunta si quiere cerrar la APP */			
 			function onBackKeyDown() {
 				navigator.notification.confirm( "¿Deseas cerrar la aplicación?", 
@@ -91,6 +90,8 @@
 				
 				$('#zonaFrame').html(contenido);
 
+				nfc.addTagDiscoveredListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
+				
 				setTimeout(validarLectura, 10000);
 			}
             
