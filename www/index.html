@@ -70,8 +70,9 @@
 				alert("Salta la lectura NFC");
 				var tag = nfcEvent.tag;
 				var ndefMessage = nfcEvent.ndefMessage;
-				alert("Tipo " + nfcEvent.type);
+				var tipo = nfcEvent.type;
 				alert(JSON.stringify(tag));
+				alert(JSON.stringify(tipo));
 				alert(nfc.bytesToString(ndefMessage[0].payload).substring(3));
 			}
 			function activadoNfcOk() {
