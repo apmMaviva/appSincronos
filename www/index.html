@@ -68,19 +68,12 @@
 /* Funciones de gestión del NFC */
 			function LecturaNfc(nfcEvent) {
 				alert("Salta la lectura NFC");
-				var tag = nfcEvent.tag;
-				var ndefMessage = nfcEvent.ndefMessage;
-				var tipo = nfcEvent.type;
-				alert(JSON.stringify(tag));
-				alert(JSON.stringify(tipo));
+				var tag = nfcEvent.tag,
+					ndefMessage = tag.ndefMessage;
+
 				alert(JSON.stringify(ndefMessage));
-				
-				var mivalor = nfcEvent.tag.ndefMessage[0]["payload"];
-				var micadena = nfc.bytesToString(mivalor);
-				
-				
-				alert("T: " + mivalor);
-				alert("R: " + micadena);
+
+				alert(nfc.bytesToString(ndefMessage[0].payload).substring(1));
 			}
 			function activadoNfcOk() {
 				alert("Activado NFC");
@@ -101,7 +94,7 @@
 				
 				$('#zonaFrame').html(contenido);
 
-				nfc.addTagDiscoveredListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
+				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
 				
 				setTimeout(validarLectura, 10000);
 			}
