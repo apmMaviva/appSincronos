@@ -70,7 +70,16 @@
 						"SALIR",
 						["NO","SI"]
 					);
-				}	
+				}
+
+				if (estado == 'F') {
+					estado = 'N';
+				
+					$("#imagenNFC").hide();
+					$("#zonaFrame").css('display','block');
+				
+					setTimeout(validarLectura, 6000);					
+				}		
 			}
 
 		
@@ -92,7 +101,7 @@
             
 			
 			function validarLectura() {
-			alert("Estado " + estado);
+
 				if (estado == 'N') {
 					if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
 						LeerBarcode();
@@ -104,6 +113,7 @@
 						setTimeout(validarLectura, 2000);
 					}	
 				}
+				
 			}
 			
 /* ESCANEO BARCODE, activa el lector y  */			
@@ -182,7 +192,7 @@
 				estado = 'N';
 								
 				$("#imagenNFC").hide();
-				$("#zonaFrame").show();
+				$("#zonaFrame").css('display','block');
 				
 				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + contenido;
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
@@ -196,7 +206,8 @@
 				estado = 'F';
 				
 				$("#imagenNFC").show();
-				$("#zonaFrame").hide();			
+				$("#zonaFrame").css('display','none');
+
 			}
 			
 			function activadoNfcFail() {
@@ -204,7 +215,7 @@
 				estado = 'N';
 				
 				$("#imagenNFC").hide();
-				$("#zonaFrame").show();
+				$("#zonaFrame").css('display','block');
 				
 				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
