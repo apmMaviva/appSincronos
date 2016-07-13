@@ -153,17 +153,17 @@
 
 			}
 
-			function LecturaNfc() {
+			function LecturaNfc(nfcEvent) {
 alert('Entra lectura');
 				var tag = nfcEvent.tag,
 					ndefMessage = tag.ndefMessage;
-
+alert('Entra lectura1');	
 				var contenido = nfc.bytesToString(ndefMessage[0].payload).substring(1);
-alert('Entra lectura ' + contenido);				
+alert('Entra lectura2 ' + contenido);				
 				if (contenido.substr(0,2)=='es' || contenido.substr(0,2)=='ES' || contenido.substr(0,2)=='en' || contenido.substr(0,2)=='EN') {
 					contenido = contenido.substr(2);
 				} 
-
+alert('Entra lectura3 ' + contenido);	
 				$("#imagenNFC").hide();
 				$("#zonaFrame").show();
 				
