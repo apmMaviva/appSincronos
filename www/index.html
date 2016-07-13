@@ -49,7 +49,8 @@
 	
 	<script type="text/javascript">
 			
-			var numSerie;
+			var numSerie;  // ID del terminal
+			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F- Leyendo NFC
 			
 			document.addEventListener("deviceready", InitSerial, false);
 	
@@ -58,15 +59,18 @@
 			
 /* Si pulsa boton atrás se pregunta si quiere cerrar la APP */			
 			function onBackKeyDown() {
-				navigator.notification.confirm( "¿Deseas cerrar la aplicación?", 
-					function (button) {
-						if (button==2) {
-							navigator.app.exitApp();
-						}
-					},
-					"SALIR",
-					["NO","SI"]
-				);
+			
+				if (estado == 'N') {
+					navigator.notification.confirm( "¿Deseas cerrar la aplicación?", 
+						function (button) {
+							if (button==2) {
+								navigator.app.exitApp();
+							}
+						},
+						"SALIR",
+						["NO","SI"]
+					);
+				}	
 			}
 
 		
@@ -74,7 +78,8 @@
 			function InitSerial() {
 
 				numSerie = device.uuid;	
-					
+				
+				estado = 'N';	
 //				alert("Mi ID es " + numSerie);
 				
 				var url = "http://192.168.201.138/pistolas/login.aspx?serial=" + numSerie;
@@ -88,26 +93,32 @@
 			
 			function validarLectura() {
 			
-				if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
-					LeerBarcode();
+				if (estado == 'N') {
+					if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
+						LeerBarcode();
+					}
+					else if ($('#zonaFrame iframe').contents().find('.leer-nfc-android').length)   {
+						LeerNFC();
+					}				
+					else {
+						setTimeout(validarLectura, 2000);
+					}	
 				}
-				else if ($('#zonaFrame iframe').contents().find('.leer-nfc-android').length)   {
-					LeerNFC();
-				}				
-				else {
-					setTimeout(validarLectura, 2000);
-				}	
 			}
 			
 /* ESCANEO BARCODE, activa el lector y  */			
 			function LeerBarcode() {
-
+				
+				estado = 'B';
+				
 				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 //				alert("Scan: paso " + pasoSincrono + " y " + procesaCarro);
 				
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
+									estado = 'N';
+									
 //									alert("Lectura CANCELADA");
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=CANCELADA';
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
@@ -116,6 +127,8 @@
 									setTimeout(validarLectura, 6000);
 								}
 								else {
+									estado = 'N';
+									
 //									alert("Lectura OK, " + result.text);
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
@@ -136,6 +149,8 @@
 								*/
 
 							}, function (error) { 
+								estado = 'N';
+								
 //								alert("Se ha producido un error de lectura"); 
 								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
 								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
@@ -154,20 +169,22 @@
 			}
 
 			function LecturaNfc(nfcEvent) {
-alert('Entra lectura');
+
 				var tag = nfcEvent.tag,
 					ndefMessage = tag.ndefMessage;
-alert('Entra lectura1');	
+	
 				var contenido = nfc.bytesToString(ndefMessage[0].payload).substring(1);
-alert('Entra lectura2 ' + contenido);				
+				
 				if (contenido.substr(0,2)=='es' || contenido.substr(0,2)=='ES' || contenido.substr(0,2)=='en' || contenido.substr(0,2)=='EN') {
 					contenido = contenido.substr(2);
 				} 
-alert('Entra lectura3 ' + contenido);	
+
+				estado = 'N';
+								
 				$("#imagenNFC").hide();
 				$("#zonaFrame").show();
 				
-				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
+				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + contenido;
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 				$("#varsession").html(contenido);
 				setTimeout(validarLectura, 6000);
@@ -175,13 +192,17 @@ alert('Entra lectura3 ' + contenido);
 			}
 			
 			function activadoNfcOk() {
-alert('Entra NFC ok');			
+				
+				estado = 'F';
+				
 				$("#imagenNFC").show();
 				$("#zonaFrame").hide();			
 			}
 			
 			function activadoNfcFail() {
-alert('Entra NFC fail');	
+				
+				estado = 'N';
+				
 				$("#imagenNFC").hide();
 				$("#zonaFrame").show();
 				
