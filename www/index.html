@@ -150,17 +150,16 @@
 			function LeerNFC() {
 				
 				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
-				$("#imagenNFC").show();
-				$("#zonaFrame").hide();
+
 			}
 
 			function LecturaNfc() {
-
+alert('Entra lectura');
 				var tag = nfcEvent.tag,
 					ndefMessage = tag.ndefMessage;
 
 				var contenido = nfc.bytesToString(ndefMessage[0].payload).substring(1);
-				
+alert('Entra lectura ' + contenido);				
 				if (contenido.substr(0,2)=='es' || contenido.substr(0,2)=='ES' || contenido.substr(0,2)=='en' || contenido.substr(0,2)=='EN') {
 					contenido = contenido.substr(2);
 				} 
@@ -175,10 +174,14 @@
 									
 			}
 			
-			function activadoNfcOk() {}
+			function activadoNfcOk() {
+alert('Entra NFC ok');			
+				$("#imagenNFC").show();
+				$("#zonaFrame").hide();			
+			}
 			
 			function activadoNfcFail() {
-
+alert('Entra NFC fail');	
 				$("#imagenNFC").hide();
 				$("#zonaFrame").show();
 				
