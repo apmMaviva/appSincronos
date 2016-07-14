@@ -103,10 +103,10 @@
 			function validarLectura() {
 
 				if (estado == 'N') {
-					if ($('#zonaFrame iframe').contents().find('.leer-barcode-android').length)   {
+					if ($('#zonaFrame iframe').contents().find('leer-barcode-android').length)   {
 						LeerBarcode();
 					}
-					else if ($('#zonaFrame iframe').contents().find('.leer-nfc-android').length)   {
+					else if ($('#zonaFrame iframe').contents().find('leer-nfc-android').length)   {
 					alert("Encuentra NFC");
 						LeerNFC();
 					}				
