@@ -37,6 +37,8 @@
 		
 		<div id="imagenNFC">
 			<img src="img/nfc.jpg">
+<!--input oculto que utilizo para que al mostrar la imagen no se vea el teclado-->			
+			<input type="text" name="nombreoculto" class="input-oculto" style="display:none;">
 		</div>	
 		
 		<div id="zonaFrame" style="width:100%;height:100%;padding:0%;margin:0%;">
@@ -211,8 +213,9 @@
 				estado = 'F';
 				
 				$("#imagenNFC").show();
+				hideKeyboard($("input.input-oculto"));
 				$("#zonaFrame").css('display','none');
-
+				
 			}
 			
 			function activadoNfcFail() {
@@ -236,6 +239,16 @@
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 				$("#varsession").html(contenido);
 				setTimeout(validarLectura, 6000);					
+			}
+						
+			function hideKeyboard(element) {
+				element.attr('readonly', 'readonly'); 
+				element.attr('disabled', 'true'); 
+				setTimeout(function() {
+					element.blur(); 
+					element.removeAttr('readonly');
+					element.removeAttr('disabled');
+				}, 100);
 			}
 			
 	</script>
