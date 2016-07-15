@@ -51,6 +51,7 @@
 			
 			var numSerie;  // ID del terminal
 			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F- Leyendo NFC
+			var desactivarNFC = false; 
 			
 			document.addEventListener("deviceready", InitSerial, false);
 	
@@ -104,14 +105,14 @@
 			function validarLectura() {
 
 				if (estado == 'N') {
-				alert("BUSCA BARCODE/NFC");
 					var form = $('#zonaFrame iframe').contents().find('form').html();
 					if (form.indexOf('leer-barcode-android') > -1)   {
 						LeerBarcode();
 					}
 					else if (form.indexOf('leer-nfc-android') > -1)   {
-				alert("ENCUENTRA NFC");	
-						LeerNFC();
+						if (desactivarNFC==false) {
+							LeerNFC();
+						}	
 					}				
 					else {
 						setTimeout(validarLectura, 2000);
@@ -208,7 +209,7 @@
 			function activadoNfcOk() {
 				
 				estado = 'F';
-				alert("Activo NFC");
+				
 				$("#imagenNFC").show();
 				$("#zonaFrame").css('display','none');
 
@@ -221,6 +222,16 @@
 				$("#imagenNFC").hide();
 				$("#zonaFrame").css('display','block');
 				
+				navigator.notification.confirm( "LECTOR NFC DESACTIVADO O INOPERATIVO", 
+						function (button) {
+							if (button==2) {
+								desactivarNFC=true;
+								navigator.notification.alert("FUNCIONANDO SIN NFC.");
+							}
+						},
+						"ERROR NFC",
+						["REINTENTAR","LECTURA MANUAL"]
+					);
 				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 				$("#varsession").html(contenido);
