@@ -103,10 +103,12 @@
 			function validarLectura() {
 
 				if (estado == 'N') {
-					if ($('#zonaFrame iframe').contents().find('leer-barcode-android').length)   {
+					var body = $('#zonaFrame iframe').contents().find('body').html();
+					
+					if (body.indexOf('leer-barcode-android') > -1)   {
 						LeerBarcode();
 					}
-					else if ($('#zonaFrame iframe').contents().find('leer-nfc-android').length)   {
+					else if (body.indexOf('leer-nfc-android') > -1)   {
 						LeerNFC();
 					}				
 					else {
