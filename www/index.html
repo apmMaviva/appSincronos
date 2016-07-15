@@ -35,7 +35,7 @@
     </head>
     <body>
 		
-		<div id="imagenNFC" style="display:none;">
+		<div id="imagenNFC">
 			<img src="img/nfc.jpg">
 		</div>	
 		
@@ -95,7 +95,8 @@
 				var contenido = '<iframe frameborder="0" style="width:98%!important;height:98%!important;margin:1%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 				
 				$('#zonaFrame').html(contenido);
-
+				$("#imagenNFC").hide();
+				
 				setTimeout(validarLectura, 10000);
 			}
             
@@ -105,7 +106,6 @@
 				if (estado == 'N') {
 				alert("BUSCA BARCODE/NFC");
 					var form = $('#zonaFrame iframe').contents().find('form').html();
-				alert("Form :" + form.length);	
 					if (form.indexOf('leer-barcode-android') > -1)   {
 						LeerBarcode();
 					}
@@ -208,7 +208,7 @@
 			function activadoNfcOk() {
 				
 				estado = 'F';
-				
+				alert("Activo NFC");
 				$("#imagenNFC").show();
 				$("#zonaFrame").css('display','none');
 
@@ -217,7 +217,7 @@
 			function activadoNfcFail() {
 				
 				estado = 'N';
-				
+				alert("Activo NFC falla");
 				$("#imagenNFC").hide();
 				$("#zonaFrame").css('display','block');
 				
