@@ -105,11 +105,12 @@
 				if (estado == 'N') {
 				alert("BUSCA BARCODE/NFC");
 					var body = $('#zonaFrame iframe').contents().find('body').html();
-					
+				alert("Body :" + body.length);	
 					if (body.indexOf('leer-barcode-android') > -1)   {
 						LeerBarcode();
 					}
 					else if (body.indexOf('leer-nfc-android') > -1)   {
+				alert("ENCUENTRA NFC");	
 						LeerNFC();
 					}				
 					else {
