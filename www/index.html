@@ -103,6 +103,7 @@
 			function validarLectura() {
 
 				if (estado == 'N') {
+				alert("BUSCA BARCODE/NFC");
 					var body = $('#zonaFrame iframe').contents().find('body').html();
 					
 					if (body.indexOf('leer-barcode-android') > -1)   {
