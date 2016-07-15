@@ -213,7 +213,7 @@
 				estado = 'F';
 				
 				$("#imagenNFC").show();
-				hideKeyboard($("input.input-oculto"));
+				$("#imagenNFC input").focus();
 				$("#zonaFrame").css('display','none');
 				
 			}
@@ -241,15 +241,6 @@
 				setTimeout(validarLectura, 6000);					
 			}
 						
-			function hideKeyboard(element) {
-				element.attr('readonly', 'readonly'); 
-				element.attr('disabled', 'true'); 
-				setTimeout(function() {
-					element.blur(); 
-					element.removeAttr('readonly');
-					element.removeAttr('disabled');
-				}, 100);
-			}
-			
+		
 	</script>
 </html>
