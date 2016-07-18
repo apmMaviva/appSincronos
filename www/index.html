@@ -67,9 +67,13 @@
 							if (button==2) {
 								navigator.app.exitApp();
 							}
+							if (button==3) {
+								alert("Voy a lanzar un back en iframe");
+								$('#zonaFrame iframe').contents().history.back();
+							}							
 						},
 						"SALIR",
-						["NO","SI"]
+						["NO","SI", "ANTERIOR"]
 					);
 				}
 
@@ -212,7 +216,7 @@
 				
 				$("#imagenNFC").show();
 				$("#zonaFrame").css('display','none');
-				
+// Esto es para esconder el teclado, ya que el foco está en un input del iframe				
 				document.activeElement.blur();
 			}
 			
