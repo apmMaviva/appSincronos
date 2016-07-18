@@ -70,9 +70,7 @@
 							if (button==3) {
 								alert("Voy a lanzar un back en iframe");
 
-								var iframe = document.getElementById('zonaFrame');
-								iframe.contentWindow.history.go(-1);
-								
+								window.frames['zonaFrame'].history.go(-1);
 								
 							}							
 						},
