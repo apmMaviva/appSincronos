@@ -68,12 +68,10 @@
 								navigator.app.exitApp();
 							}
 							if (button==3) {
-								alert("Voy a lanzar un back en iframe1");
-								$('#zonaFrame iframe').contentWindow.history.go(-1);
-								setTimeout(function() {
-									alert("Voy a lanzar un back en iframe2");
-									$('#zonaFrame iframe').contents().history.go(-1);
-								}, 3000);
+								alert("Voy a lanzar un back en iframe");
+
+								var iframe = document.getElementById('iframe');
+								iframe.contentWindow.history.go(-1);
 								
 								
 							}							
