@@ -70,7 +70,11 @@
 							if (button==3) {
 								alert("Voy a lanzar un back en iframe");
 
-								window.frames['zonaFrame'].history.go(-1);
+								 navigator.app.backHistory();
+								 
+								alert("Otra manera");
+
+								history.back(-1);	
 								
 							}							
 						},
