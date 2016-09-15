@@ -1,5 +1,5 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.maviva.app" version="1.0.0">
-	<name>Maviva</name>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.maviva.apppistolas" version="1.0.0">
+	<name>Pistolas Maviva</name>
 	<description>Aplicacion Pistolas Maviva</description>
 	<author href="http://www.grupomaviva.es" email="informatica@grupomaviva.es">App Pistolas</author>
 	<content src="index.html"/>
@@ -23,7 +23,6 @@
 	<feature name="InAppBrowser"><param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" /></feature>
 
     <preference name="phonegap-version" value="3.7.0" />
-    <preference name="orientation"      value="default" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
     <preference name="webviewbounce"    value="false" />
@@ -40,7 +39,7 @@
     <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
     <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
     <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
-    <icon src="res/icon/ios/icon-180.png"         gap:platform="ios"        width="180" height="180" />
+    <icon src="res/icon/ios/icon-180.png"           gap:platform="ios"        width="180" height="180" />
     <icon src="res/icon/webos/icon-64.png"          gap:platform="webos" />
     <icon src="res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
     <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
