@@ -109,7 +109,10 @@
 
 				if (estado == 'N') {
 					var form = $('#zonaFrame iframe').contents().find('form').html();
-					if (form.indexOf('leer-barcode-android') > -1)   {
+					if (form.indexOf('ContentPlaceHolder1_confirmacion') > -1)   {
+						setTimeout(validarLectura, 2000);
+					}
+					else if (form.indexOf('leer-barcode-android') > -1)   {
 						LeerBarcode();
 					}
 					else if (form.indexOf('leer-nfc-android') > -1)   {
