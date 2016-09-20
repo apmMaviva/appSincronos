@@ -59,7 +59,7 @@
 			
 			var numSerie;  // ID del terminal
 			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F-Leyendo NFC, M-Lectura manual
-			var desactivarNFC = false; 
+			var focoTexto = false; // Necesito saber si el foco está o no en el textfield para esconder el teclado ANDROID
 			
 			document.addEventListener("deviceready", InitSerial, false);
 	
@@ -119,10 +119,17 @@
 				
 				$("#iniciobarcode").on("click", LeerBarcode);
 
-				$("#inicionfc").on("click", LeerNFC);		
+				$("#inicionfc").on("click", LeerNFC);
 
 				$("#confirmar").on("click", ConfirmaLecturaManual);				
-					
+				
+				$("#textoinput input").focusin(function() {
+					focoTexto = true; alert("DENTRO");
+				});
+
+				$("#textoinput input").focusout(function() {
+					focoTexto = false; alert("FUERA");
+				});
 				
 				setTimeout(validarLectura, 10000);
 			}
@@ -157,6 +164,10 @@
 				}
 				else {
 					setTimeout(validarLectura, 2000);
+				}
+				
+				if (focoTexto==false) {
+					document.activeElement.blur();  // Quito el foco para que no salga teclado
 				}
 			}
 			
@@ -298,25 +309,14 @@
 			
 			function activadoNfcFail() {
 				
-				estado = 'N';
-
-				$("#imagenNFC").hide();
-				$("#zonaFrame").show();
+				estado = 'M';
 				
-				navigator.notification.confirm( "LECTOR NFC DESACTIVADO O INOPERATIVO", 
-						function (button) {
-							if (button==2) {
-								desactivarNFC=true;
-								navigator.notification.alert("FUNCIONANDO SIN NFC.");
-							}
-						},
-						"ERROR NFC",
-						["REINTENTAR","LECTURA MANUAL"]
-					);
-				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
-				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-				$("#varsession").html(contenido);
-				setTimeout(validarLectura, 6000);		
+				navigator.notification.alert("FUNCIONANDO SIN NFC.");
+
+				setTimeout(validarLectura, 2000);		
+
+// Esto es para esconder el teclado, ya que el foco está en un input del iframe				
+				document.activeElement.blur();				
 			}
 						
 	
