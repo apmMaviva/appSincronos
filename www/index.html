@@ -169,7 +169,7 @@
 /* LECTURA MANUAL DE CAMPO */			
 			function ConfirmaLecturaManual() {
 				
-				var valor = $("#confirmar p").text();
+				var valor = $('#textoinput input').val();
 				alert("Tengo " + valor);
 					
 				estado = 'N';
@@ -182,7 +182,8 @@
 
 				$('#zonaLectura').hide();
 				$("#zonaFrame").show();	
-
+				
+				setTimeout(validarLectura, 2000);
 			}
 			
 			
