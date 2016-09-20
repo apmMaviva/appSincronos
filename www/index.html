@@ -156,11 +156,14 @@
 			function LecturaCampoAndroid(titulo) {
 			
 				estado = 'M';
+						
+				document.activeElement.blur();  // Quito el foco para que no salga teclado
 				
 				$('#zonaLectura').show();
 				$('#zonaLectura input').val("");
 				$('#zonaLectura h2').text(titulo);
-				$("#zonaFrame").hide();			
+				$("#zonaFrame").hide();	
+				
 			}
 			
 /* LECTURA MANUAL DE CAMPO */			
