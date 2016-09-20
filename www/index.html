@@ -112,23 +112,8 @@
 
 				$("#inicionfc").on("click", LeerNFC);		
 
-				$("#confirmar").on("click", function(){
-					var valor = $("#confirmar p").text();
-					alert("Tengo " + valor);
+				$("#confirmar").on("click", ConfirmaLecturaManual);				
 					
-					estado = 'N';
-									
-//									alert("Lectura OK, " + result.text);
-					var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + valor;
-					var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-					$("#varsession").html(contenido);
-//									alert("Lectura COMPLETADA");
-
-					$('#zonaLectura').hide();
-					$("#zonaFrame").show();	
-				
-					setTimeout(validarLectura, 6000);
-				});						
 				
 				setTimeout(validarLectura, 10000);
 			}
@@ -178,6 +163,24 @@
 				$("#zonaFrame").hide();			
 			}
 			
+/* LECTURA MANUAL DE CAMPO */			
+			function ConfirmaLecturaManual() {
+				
+				var valor = $("#confirmar p").text();
+				alert("Tengo " + valor);
+					
+				estado = 'N';
+									
+//									alert("Lectura OK, " + result.text);
+				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + valor;
+				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
+				$("#varsession").html(contenido);
+//									alert("Lectura COMPLETADA");
+
+				$('#zonaLectura').hide();
+				$("#zonaFrame").show();	
+
+			}
 			
 /* ESCANEO BARCODE, activa el lector y espera respuesta */			
 			function LeerBarcode() {
@@ -301,6 +304,8 @@
 				setTimeout(validarLectura, 6000);		
 			}
 						
-		
+	
+
+	
 	</script>
 </html>
