@@ -108,6 +108,12 @@
 				$('#zonaFrame').html(contenido);
 				$("#zonaLectura").hide();
 				
+				$("#iniciobarcode").on("click", function() {
+					alert("Inicio barcode");
+				});
+
+				$("#inicionfc").on("click", LeerNFC);				
+				
 				setTimeout(validarLectura, 10000);
 			}
             
@@ -120,13 +126,11 @@
 						setTimeout(validarLectura, 2000);
 					}
 					else if (form.indexOf('leer-campo-android') > -1)   {
-					alert("orden lectura");
 						var posicion = form.indexOf('titulo-android');
 						var cad1 = form.substr(posicion,99999);
 						var p1 = cad1.indexOf('>');
 						var p2 = cad1.indexOf('<');
 						var titulo = cad1.substr(p1+1,p2-p1-1);
-					alert("Titulo " + titulo);
 						LecturaCampoAndroid(titulo);
 					}
 /*					else if (form.indexOf('leer-campo-android') > -1)   {
@@ -212,6 +216,7 @@
 // Activación del lector NFC
 			function LeerNFC() {
 				
+				alert("Lectura NFC");
 				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
 
 			}
