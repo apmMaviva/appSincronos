@@ -125,7 +125,7 @@
 						var cad1 = form.substr(posicion,99999);
 						var p1 = cad1.indexOf('>');
 						var p2 = cad1.indexOf('<');
-						var titulo = cad1.substr(p1+1,p2-p1);
+						var titulo = cad1.substr(p1+1,p2-p1-1);
 					alert("Titulo " + titulo);
 						LecturaCampoAndroid(titulo);
 					}
