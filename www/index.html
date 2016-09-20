@@ -108,9 +108,7 @@
 				$('#zonaFrame').html(contenido);
 				$("#zonaLectura").hide();
 				
-				$("#iniciobarcode").on("click", function() {
-					alert("Inicio barcode");
-				});
+				$("#iniciobarcode").on("click", LeerBarcode);
 
 				$("#inicionfc").on("click", LeerNFC);				
 				
@@ -151,6 +149,9 @@
 
 /* ESCANEO ENTRADA MANUAL DE DATOS, activa el teclado */				
 			function LecturaCampoAndroid(titulo) {
+			
+				estado = 'M';
+				
 				$('#zonaLectura').show();
 				$('#zonaLectura input').val("");
 				$('#zonaLectura h2').text(titulo);
@@ -169,7 +170,7 @@
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
-									estado = 'N';
+									estado = 'M';
 									
 //									alert("Lectura CANCELADA");
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=CANCELADA';
@@ -186,6 +187,10 @@
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
 //									alert("Lectura COMPLETADA");
+
+									$('#zonaLectura').hide();
+									$("#zonaFrame").show();	
+				
 									setTimeout(validarLectura, 6000);
 								} 
 
@@ -201,12 +206,12 @@
 								*/
 
 							}, function (error) { 
-								estado = 'N';
+								estado = 'M';
 								
-//								alert("Se ha producido un error de lectura"); 
+								alert("Se ha producido un error de lectura"); 
 								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
-								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-								$("#varsession").html(contenido);
+//								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
+//								$("#varsession").html(contenido);
 //								alert("Lectura COMPLETADA");	
 								setTimeout(validarLectura, 6000);		
 							} );	
@@ -216,7 +221,6 @@
 // Activación del lector NFC
 			function LeerNFC() {
 				
-				alert("Lectura NFC");
 				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
 
 			}
@@ -234,8 +238,8 @@
 
 				estado = 'N';
 								
-				$("#imagenNFC").hide();
-				$("#zonaFrame").css('display','block');
+				$("#zonaLectura").hide();
+				$("#zonaFrame").show();
 				
 				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + contenido;
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
@@ -248,8 +252,8 @@
 				
 				estado = 'F';
 				
-				$("#imagenNFC").show();
-				$("#zonaFrame").css('display','none');
+				$("#zonaLectura").show();
+				$("#zonaFrame").hide();
 // Esto es para esconder el teclado, ya que el foco está en un input del iframe				
 				document.activeElement.blur();
 			}
