@@ -83,6 +83,15 @@
 						["NO","SI", "ANTERIOR"]
 					);
 				}
+				
+				if (estado == 'M') {
+					estado = 'N';
+				
+					$("#zonaLectura").hide();
+					$("#zonaFrame").show();
+				
+					setTimeout(validarLectura, 6000);					
+				}
 /*
 				if (estado == 'F') {
 					estado = 'N';
