@@ -166,7 +166,7 @@
 					setTimeout(validarLectura, 2000);
 				}
 				
-				if (focoTexto==false) {
+				if (estado == 'M' && !focoTexto) {
 					document.activeElement.blur();  // Quito el foco para que no salga teclado
 				}
 			}
