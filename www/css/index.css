@@ -55,10 +55,34 @@ padding: 10% 0;
 text-align: center;
 padding: 10% 0;	
 }
-#imagenNFC {
-	height:100%;
+#iniciobarcode, #inicionfc {
+	width:49.5%;
+	display:inline-block;
+}
+#iniciobarcode img, #inicionfc img{
 	width:100%;
 }
-#imagenNFC img{
-	width:100%;
+#textoinput {
+	width:74%;
+	display:inline-block;
+}
+#textoinput  input{
+width: 94%;
+height: 50px;
+margin: 5px 3%;
+}
+#confirmar {
+	width:25%;
+	display:inline-block;
+}
+#confirmar p {
+    margin: 5px;
+    width: 100%;
+    font-size: 40px;
+    font-family: calibri;
+    font-weight: bold;
+    color: rgb(0, 73, 150);
+    border: 1px solid rgb(0, 73, 150);
+    text-align: center;
+    background-color: rgb(251, 183, 0);
 }
