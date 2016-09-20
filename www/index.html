@@ -36,6 +36,7 @@
     <body>
 		
 		<div id="zonaLectura">
+			<h2>TEXTO</h2>
 			<div>
 				<div id="iniciobarcode"><img src="img/logobarcode.jpg"></div>
 				<div id="inicionfc"><img src="img/logonfc.jpg"></div>
@@ -57,7 +58,7 @@
 	<script type="text/javascript">
 			
 			var numSerie;  // ID del terminal
-			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F- Leyendo NFC
+			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F-Leyendo NFC, M-Lectura manual
 			var desactivarNFC = false; 
 			
 			document.addEventListener("deviceready", InitSerial, false);
@@ -82,7 +83,7 @@
 						["NO","SI", "ANTERIOR"]
 					);
 				}
-
+/*
 				if (estado == 'F') {
 					estado = 'N';
 				
@@ -90,7 +91,7 @@
 					$("#zonaFrame").css('display','block');
 				
 					setTimeout(validarLectura, 6000);					
-				}		
+				}	*/	
 			}
 
 		
@@ -100,13 +101,12 @@
 				numSerie = device.uuid;	
 				
 				estado = 'N';	
-//				alert("Mi ID es " + numSerie);
 				
 				var url = "http://192.168.201.138/pistolas/login.aspx?serial=" + numSerie;
 				var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 				
 				$('#zonaFrame').html(contenido);
-				$("#imagenNFC").hide();
+				$("#zonaLectura").hide();
 				
 				setTimeout(validarLectura, 10000);
 			}
@@ -119,14 +119,23 @@
 					if (form.indexOf('ContentPlaceHolder1_confirmacion') > -1)   {
 						setTimeout(validarLectura, 2000);
 					}
-					else if (form.indexOf('leer-barcode-android') > -1)   {
+					else if (form.indexOf('leer-campo-android') > -1)   {
+						var posicion = form.indexOf('titulo-android');
+						var cad1 = form.substr(posicion,99999);
+						var p1 = cad1.form.indexOf('>');
+						var p2 = cad1.form.indexOf('<');
+						var titulo = cad1.substr(p1+1,p2-p1);
+						alert("Titulo " + titulo);
+						LecturaCampoAndroid(titulo);
+					}
+/*					else if (form.indexOf('leer-campo-android') > -1)   {
 						LeerBarcode();
 					}
 					else if (form.indexOf('leer-nfc-android') > -1)   {
 						if (desactivarNFC==false) {
 							LeerNFC();
 						}	
-					}				
+					}	*/			
 					else {
 						setTimeout(validarLectura, 2000);
 					}	
@@ -134,7 +143,17 @@
 				
 			}
 			
-/* ESCANEO BARCODE, activa el lector y  */			
+
+/* ESCANEO ENTRADA MANUAL DE DATOS, activa el teclado */				
+			function LecturaCampoAndroid(titulo) {
+				$('#zonaLectura').show();
+				$('#zonaLectura input').val("");
+				$('#zonaLectura h2').text(titulo);
+				$("#zonaFrame").hide();			
+			}
+			
+			
+/* ESCANEO BARCODE, activa el lector y espera respuesta */			
 			function LeerBarcode() {
 				
 				estado = 'B';
