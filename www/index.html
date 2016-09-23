@@ -92,20 +92,20 @@
 				if (estado == 'M') {
 					estado = 'N';
 				
-					$("#zonaLectura").hide();
-					$("#zonaFrame").show();
+					$("#zonaLectura").hide(300);
+					$("#zonaFrame").show(300);
 				
 					setTimeout(validarLectura, 6000);					
 				}
-/*
+
 				if (estado == 'F') {
 					estado = 'N';
 				
-					$("#imagenNFC").hide();
-					$("#zonaFrame").css('display','block');
+					$("#zonaNFC").hide(300);
+					$("#zonaLectura").ahow(300);
 				
 					setTimeout(validarLectura, 6000);					
-				}	*/	
+				}		
 			}
 
 		
@@ -121,6 +121,7 @@
 				
 				$('#zonaFrame').html(contenido);
 				$("#zonaLectura").hide();
+				$("#zonaNFC").hide();
 				
 				$("#iniciobarcode").on("click", LeerBarcode);
 
