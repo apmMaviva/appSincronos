@@ -46,6 +46,11 @@
 				<div id="confirmar"><p>OK</p></div>
 			</div>				
 		</div>	
+
+		<div id="zonaNFC">
+			<h2>TEXTO</h2>
+			<div><img src="img/logobarcode.jpg"></div>
+		</div>
 		
 		<div id="zonaFrame" style="width:100%;height:100%;padding:0%;margin:0%;">
 		</div>
@@ -182,6 +187,7 @@
 				$('#zonaLectura').show();
 				$('#zonaLectura input').val("");
 				$('#zonaLectura h2').text(titulo);
+				$('#zonaNFC h2').text(titulo);				
 				$("#zonaFrame").hide();	
 				
 			}
@@ -269,7 +275,7 @@
 			
 // Activación del lector NFC
 			function LeerNFC() {
-				
+
 				nfc.addNdefListener(LecturaNfc, activadoNfcOk, activadoNfcFail);
 
 			}
@@ -287,8 +293,8 @@
 
 				estado = 'N';
 								
-				$("#zonaLectura").hide();
-				$("#zonaFrame").show();
+				$("#zonaLectura").hide(300);
+				$("#zonaFrame").show(300);
 				
 				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + contenido;
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
@@ -301,7 +307,8 @@
 				
 				estado = 'F';
 				
-				$("#zonaLectura").show();
+				$("#zonaLectura").hide(300);
+				$("#zonaNFC").show(300);
 				$("#zonaFrame").hide();
 // Esto es para esconder el teclado, ya que el foco está en un input del iframe				
 				document.activeElement.blur();
@@ -310,6 +317,8 @@
 			function activadoNfcFail() {
 				
 				estado = 'M';
+				$("#zonaLectura").show(300);
+				$("#zonaNFC").hide(300);
 				
 				navigator.notification.alert("FUNCIONANDO SIN NFC.");
 
