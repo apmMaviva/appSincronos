@@ -226,13 +226,13 @@
 
 								if (result.cancelled) {
 									estado = 'M';
+									$("#zonaLectura").show(300);
+									$("#zonaNFC").hide(300);
 									
-//									alert("Lectura CANCELADA");
-									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=CANCELADA';
-									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-									$("#varsession").html(contenido);
-//									alert("Lectura COMPLETADA");
-									setTimeout(validarLectura, 6000);
+									setTimeout(validarLectura, 2000);		
+
+// Esto es para esconder el teclado, ya que el foco está en un input del iframe				
+									document.activeElement.blur();		
 								}
 								else {
 									estado = 'N';
@@ -262,13 +262,15 @@
 
 							}, function (error) { 
 								estado = 'M';
+								$("#zonaLectura").show(300);
+								$("#zonaNFC").hide(300);
 								
-								alert("Se ha producido un error de lectura"); 
-								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=ERROR';
-//								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-//								$("#varsession").html(contenido);
-//								alert("Lectura COMPLETADA");	
-								setTimeout(validarLectura, 6000);		
+								navigator.notification.alert("ERROR EN LECTURA DE BARCODE");
+
+								setTimeout(validarLectura, 2000);		
+
+				// Esto es para esconder el teclado, ya que el foco está en un input del iframe				
+								document.activeElement.blur();		
 							} );	
 
 			}
