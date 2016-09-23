@@ -55,10 +55,10 @@ padding: 10% 0;
 text-align: center;
 padding: 10% 0;	
 }
-#zonaLectura {
+#zonaLectura, #zonaNFC {
 height:100%;
 }
-#zonaLectura h2 {
+#zonaLectura h2, #zonaNFC h2  {
 text-align: center;
 font-size: 46px;
 font-family: Calibri;
@@ -71,7 +71,7 @@ padding: 15px 0px;
 	width:49.5%;
 	display:inline-block;
 }
-#iniciobarcode img, #inicionfc img{
+#iniciobarcode img, #inicionfc img, #zonaNFC img{
 	width:100%;
 }
 #textoinput {
