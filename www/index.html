@@ -90,6 +90,7 @@
 				}
 				
 				if (estado == 'M') {
+				alert("Dentro");
 					estado = 'N';
 				
 					$("#zonaLectura").hide(300);
@@ -230,7 +231,7 @@
 									$("#zonaLectura").show();
 									$("#zonaFrame").hide();
 									
-									setTimeout(validarLectura, 100);		
+									setTimeout(validarLectura, 5000);		
 
 								}
 								else {
