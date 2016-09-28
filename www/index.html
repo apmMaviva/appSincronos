@@ -226,6 +226,9 @@
 
 								if (result.cancelled) {
 									estado = 'M';
+									
+									alert("Lectura cancelada");
+									
 									$("#zonaLectura").show(300);
 									$("#zonaNFC").hide(300);
 									
@@ -237,7 +240,7 @@
 								else {
 									estado = 'N';
 									
-//									alert("Lectura OK, " + result.text);
+									alert("Lectura OK, " + result.text);
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
