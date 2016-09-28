@@ -90,7 +90,6 @@
 				}
 				
 				if (estado == 'M') {
-				alert("Dentro");
 					estado = 'N';
 				
 					$("#zonaLectura").hide(300);
@@ -107,6 +106,15 @@
 				
 					setTimeout(validarLectura, 6000);					
 				}		
+				
+				if (estado == 'B') {
+					estado = 'M';
+				
+					$("#zonaFrame").hide(300);
+					$("#zonaLectura").show(300);
+				
+					setTimeout(validarLectura, 6000);					
+				}					
 			}
 
 		
@@ -226,13 +234,14 @@
 				scanner.scan( function (result) { 
 
 								if (result.cancelled) {
+/*  No hago nada, si usuario cancela es porque pulsa atras y entonces ya se ejecuta en onBackKeyDown
 									estado = 'M';
 									
 									$("#zonaLectura").show();
 									$("#zonaFrame").hide();
 									
 									setTimeout(validarLectura, 5000);		
-
+*/
 								}
 								else {
 									estado = 'N';
