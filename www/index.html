@@ -228,13 +228,10 @@
 									estado = 'M';
 									
 									$("#zonaLectura").show();
-									$("#zonaNFC").hide();
 									$("#zonaFrame").hide();
 									
-									setTimeout(validarLectura, 2000);		
+									setTimeout(validarLectura, 100);		
 
-// Esto es para esconder el teclado, ya que el foco está en un input del iframe				
-									document.activeElement.blur();		
 								}
 								else {
 									estado = 'N';
