@@ -162,17 +162,16 @@
 			
 /* Si entra en offline desactivo la navegación */
 			function modoOffline() {
-				
 				$("#deshabilitaNav").show();
 				var margentop = ($(window).height() - $("#deshabilitaNav .textodeshabilitaNav").height() )/2;
-				alert("Salta Offline " + margentop);
+
 				$("#deshabilitaNav .textodeshabilitaNav").css("margin-top",margentop);
 			}
 
 /* Si entra en online reactivo la navegación */
 			function modoOnline() {
-				alert("Salta Online");
 				$("#deshabilitaNav").hide();
+				history.back(-1);
 			}			
 			
 			function validarLectura() {
