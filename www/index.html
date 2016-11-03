@@ -164,13 +164,9 @@
 			function modoOffline() {
 				
 				$("#deshabilitaNav").show();
-				var margentop = ($(window).height() - $("#deshabilitaNav").show() )/2;
+				var margentop = ($(window).height() - $("#deshabilitaNav").height() )/2;
 				alert("Salta Offline " + margentop);
 				$("#deshabilitaNav .textodeshabilitaNav").css("margin-top",margentop);
-				alert("Salta Offline2 " + margentop);
-				$("#deshabilitaNav.textodeshabilitaNav").css("margin-top",margentop);			
-				alert("Salta Offline3 " + margentop);
-				$("#deshabilitaNav").find("div").css("margin-top",margentop);					
 			}
 
 /* Si entra en online reactivo la navegación */
