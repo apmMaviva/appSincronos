@@ -130,6 +130,8 @@
 				
 				document.addEventListener("online", modoOnline, false);
 				
+				document.addEventListener("resume", onResume, false);
+				
 				numSerie = device.uuid;	
 				
 				estado = 'N';	
@@ -174,13 +176,16 @@
 				history.back(-1);
 			}			
 			
+/* Si la aplicacion sale de background */			
+			function onResume() {
+				alert("Salta onresume");
+			}
+			
 			function validarLectura() {
-				
-				alert("Valida lectura");
 
 				if (estado == 'N') {
 					var form = $('#zonaFrame iframe').contents().find('form').html();
-					alert("Holder1_confirmacion " + form.indexOf('ContentPlaceHolder1_confirmacion'));
+
 					if (form.indexOf('ContentPlaceHolder1_confirmacion') > -1)   {
 						setTimeout(validarLectura, 2000);
 					}
