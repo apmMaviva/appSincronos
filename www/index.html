@@ -260,10 +260,7 @@
 				
 				estado = 'B';
 				
-				var scanner = cordova.require("cordova/plugin/BarcodeScanner");
-//				alert("Scan: paso " + pasoSincrono + " y " + procesaCarro);
-				
-				scanner.scan( function (result) { 
+				cordova.plugins.barcodeScanner.scan( function (result) { 
 
 								if (result.cancelled) {
 /*  No hago nada, si usuario cancela es porque pulsa atras y entonces ya se ejecuta en onBackKeyDown
