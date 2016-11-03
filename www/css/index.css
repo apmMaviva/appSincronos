@@ -65,16 +65,19 @@ left:0;
 width:100%;
 height:100%;
 z-index:9999;
-background-color:rgba(0,0,0,0.2);
+background-color:rgba(0,0,0,0.8);
 }
 #deshabilitaNav  .textodeshabilitaNav{
 background-color:white;
-width:60%;
-margin-left:20%;
+width:70%;
+margin-left:15%;
+padding:20px;
+border-radius:8px;
 } 
 #deshabilitaNav  .textodeshabilitaNav p {
-font-size:18px;
+font-size:22px;
 font-weight:bold;
+text-align:center;
 } 
 #zonaLectura h2, #zonaNFC h2  {
 text-align: center;
