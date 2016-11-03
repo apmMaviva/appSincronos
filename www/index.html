@@ -175,9 +175,12 @@
 			}			
 			
 			function validarLectura() {
+				
+				alert("Valida lectura");
 
 				if (estado == 'N') {
 					var form = $('#zonaFrame iframe').contents().find('form').html();
+					alert("Holder1_confirmacion " + form.indexOf('ContentPlaceHolder1_confirmacion'));
 					if (form.indexOf('ContentPlaceHolder1_confirmacion') > -1)   {
 						setTimeout(validarLectura, 2000);
 					}
