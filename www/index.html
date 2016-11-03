@@ -52,6 +52,10 @@
 			<div><img src="img/nfc.jpg"></div>
 		</div>
 		
+		<div id="deshabilitaNav">
+			<p>CONEXIÓN WIFI NECESARIA</p>
+		</div>		
+		
 		<div id="zonaFrame" style="width:100%;height:100%;padding:0%;margin:0%;">
 		</div>
 		
@@ -70,7 +74,10 @@
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
 	
+			document.addEventListener("offline", modoOffline, false);
 			
+			document.addEventListener("online", modoOnline, false);
+	
 /* Si pulsa boton atrás se pregunta si quiere cerrar la APP */			
 			function onBackKeyDown() {
 			
@@ -131,6 +138,7 @@
 				$('#zonaFrame').html(contenido);
 				$("#zonaLectura").hide();
 				$("#zonaNFC").hide();
+				$("#deshabilitaNav").hide();
 				
 				$("#iniciobarcode").on("click", LeerBarcode);
 
@@ -149,6 +157,16 @@
 				setTimeout(validarLectura, 10000);
 			}
             
+			
+/* Si entra en offline desactivo la navegación */
+			function modoOffline() {
+				$("#deshabilitaNav").show();
+			}
+
+/* Si entra en online reactivo la navegación */
+			function modoOnline() {
+				$("#deshabilitaNav").show();
+			}			
 			
 			function validarLectura() {
 
