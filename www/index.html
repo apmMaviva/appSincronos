@@ -165,13 +165,13 @@
 				alert("Salta Offline");
 				$("#deshabilitaNav").show();
 				var margentop = ($(window).height() - $("#deshabilitaNav").show() )/2;
-				$("#deshabilitaNav").css('margin-top',margentop);
+				$("#deshabilitaNav .textodeshabilitaNav").css('margin-top',margentop);
 			}
 
 /* Si entra en online reactivo la navegación */
 			function modoOnline() {
 				alert("Salta Online");
-				$("#deshabilitaNav").show();
+				$("#deshabilitaNav").hide();
 			}			
 			
 			function validarLectura() {
