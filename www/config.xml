@@ -10,9 +10,9 @@
     <access origin="*" />
 	
 	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
-	<gap:plugin name="org.apache.cordova.dialogs"/>
-	<gap:plugin name="org.apache.cordova.device"/>
-	<gap:plugin name="org.apache.cordova.network-information"/>
+	<gap:plugin name="cordova-plugin-dialogs" source="npm"/>
+	<gap:plugin name="cordova-plugin-device" source="npm"/>
+	<gap:plugin name="cordova-plugin-network-information" source="npm"/>
 	<gap:plugin name="phonegap-nfc" source="npm"/>
 
     <feature name="http://api.phonegap.com/1.0/device" />
