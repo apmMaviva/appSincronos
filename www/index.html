@@ -74,10 +74,6 @@
 	
 			document.addEventListener("backbutton", onBackKeyDown, false);
 	
-			document.addEventListener("offline", modoOffline, false);
-			
-			document.addEventListener("online", modoOnline, false);
-	
 /* Si pulsa boton atrás se pregunta si quiere cerrar la APP */			
 			function onBackKeyDown() {
 			
@@ -127,7 +123,11 @@
 		
 /* Se inicia la aplicación, necesito darle un numero de serie unico para mandar las lecturas de BARCODES a la BBDD con este ID */			
 			function InitSerial() {
-				alert("Arranca");
+
+				document.addEventListener("offline", modoOffline, false);
+				
+				document.addEventListener("online", modoOnline, false);
+				
 				numSerie = device.uuid;	
 				
 				estado = 'N';	
