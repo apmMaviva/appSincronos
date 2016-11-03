@@ -126,6 +126,10 @@
 /* Se inicia la aplicación, necesito darle un numero de serie unico para mandar las lecturas de BARCODES a la BBDD con este ID */			
 			function InitSerial() {
 
+				$("#deshabilitaNav").hide();	
+				$("#zonaLectura").hide();
+				$("#zonaNFC").hide();
+							
 				document.addEventListener("offline", modoOffline, false);
 				
 				document.addEventListener("online", modoOnline, false);
@@ -136,11 +140,8 @@
 				
 				var url = "http://192.168.201.138/pistolas-libra/login.aspx?serial=" + numSerie;
 				var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
-				
+
 				$('#zonaFrame').html(contenido);
-				$("#zonaLectura").hide();
-				$("#zonaNFC").hide();
-				$("#deshabilitaNav").hide();
 				
 				$("#iniciobarcode").on("click", LeerBarcode);
 
