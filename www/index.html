@@ -162,10 +162,15 @@
 			
 /* Si entra en offline desactivo la navegación */
 			function modoOffline() {
-				alert("Salta Offline");
+				
 				$("#deshabilitaNav").show();
 				var margentop = ($(window).height() - $("#deshabilitaNav").show() )/2;
-				$("#deshabilitaNav .textodeshabilitaNav").css('margin-top',margentop);
+				alert("Salta Offline " + margentop);
+				$("#deshabilitaNav .textodeshabilitaNav").css("margin-top",margentop);
+				alert("Salta Offline2 " + margentop);
+				$("#deshabilitaNav.textodeshabilitaNav").css("margin-top",margentop);			
+				alert("Salta Offline3 " + margentop);
+				$("#deshabilitaNav").find("div").css("margin-top",margentop);					
 			}
 
 /* Si entra en online reactivo la navegación */
