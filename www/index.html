@@ -76,6 +76,7 @@
 			var numSerie;  // ID del terminal
 			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F-Leyendo NFC, M-Lectura manual
 			var focoTexto = false; // Necesito saber si el foco está o no en el textfield para esconder el teclado ANDROID
+			var miTimestamp = 0; // Guardo la ultima vez que se ejecuta el proceso de lectura de barcodes
 			
 			document.addEventListener("deviceready", InitSerial, false);
 	
@@ -186,11 +187,16 @@
 			
 /* Si la aplicacion sale de background */			
 			function onResume() {
-				alert("Salta onresume");
+				var ahora = Math.floor(Date.now() / 1000);
+				if (ahora - miTimestamp > 3) {
+					validarLectura();
+				}
 			}
 			
 			function validarLectura() {
-
+				
+				miTimestamp = Math.floor(Date.now() / 1000);
+				
 				if (estado == 'N') {
 					var form = $('#zonaFrame iframe').contents().find('form').html();
 
