@@ -36,6 +36,10 @@
     </head>
     <body>
 		
+		<div id="zonaImagen" style="width:100%;height:100%;">
+			<img src="res/screen/android/screen-ldpi-portrait.png" style="width:100%;height:100%;">
+		</div>
+		
 		<div id="zonaLectura">
 			<h2>TEXTO</h2>
 			<div>
@@ -53,7 +57,7 @@
 			<div><img src="img/nfc.jpg"></div>
 		</div>
 		
-		<div id="deshabilitaNav">
+		<div id="deshabilitaNav" style="display:none;">
 			<div class="textodeshabilitaNav">
 			<p>CONEXIÓN WIFI NECESARIA</p>
 			</div>
@@ -140,11 +144,6 @@
 				var url = "http://192.168.201.138/pistolas-libra/login.aspx?serial=" + numSerie;
 				var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 
-				$("#deshabilitaNav").hide();				
-				$('#zonaFrame').html(contenido);
-				$("#zonaLectura").hide();
-				$("#zonaNFC").hide();
-				
 				$("#iniciobarcode").on("click", LeerBarcode);
 
 				$("#inicionfc").on("click", LeerNFC);
@@ -158,6 +157,14 @@
 				$("#textoinput input").focusout(function() {
 					focoTexto = false; 
 				});
+
+				setTimeout( function(){				
+					$("#deshabilitaNav").hide();
+					$('#zonaFrame').html(contenido);
+					$("#zonaLectura").hide();
+					$("#zonaNFC").hide();
+					$("#zonaImagen").hide(600);
+				}, 1000);
 				
 				setTimeout(validarLectura, 10000);
 			}
