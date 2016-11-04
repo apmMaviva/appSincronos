@@ -60,7 +60,7 @@ height:100%;
 }
 #deshabilitaNav { 
 position:absolute;
-top:0;
+top:-10000px;
 left:0;
 width:100%;
 height:100%;
