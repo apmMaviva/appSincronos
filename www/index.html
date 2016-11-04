@@ -188,8 +188,9 @@
 /* Si la aplicacion sale de background */			
 			function onResume() {
 				var ahora = Math.floor(Date.now() / 1000);
-				if (ahora - miTimestamp > 3) {
+				if (ahora - miTimestamp > 8) {
 					validarLectura();
+					alert('Resume');
 				}
 			}
 			
@@ -336,6 +337,8 @@
 
 			function LecturaNfc(nfcEvent) {
 
+				alert('Lectura NFC');
+				
 				var tag = nfcEvent.tag,
 					ndefMessage = tag.ndefMessage;
 	
