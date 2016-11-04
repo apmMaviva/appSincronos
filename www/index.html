@@ -57,7 +57,7 @@
 			<div><img src="img/nfc.jpg"></div>
 		</div>
 		
-		<div id="deshabilitaNav" style="display:none;">
+		<div id="deshabilitaNav" style="height:0;">
 			<div class="textodeshabilitaNav">
 			<p>CONEXIÓN WIFI NECESARIA</p>
 			</div>
@@ -160,7 +160,7 @@
 				});
 
 				setTimeout( function(){				
-					$("#deshabilitaNav").hide();
+/*					$("#deshabilitaNav").hide();*/
 					$('#zonaFrame').html(contenido);
 					$("#zonaLectura").hide();
 					$("#zonaNFC").hide();
@@ -173,7 +173,7 @@
 			
 /* Si entra en offline desactivo la navegación */
 			function modoOffline() {
-				$("#deshabilitaNav").show();
+				$("#deshabilitaNav").height($(window).height());
 				var margentop = ($(window).height() - $("#deshabilitaNav .textodeshabilitaNav").height() )/2;
 
 				$("#deshabilitaNav .textodeshabilitaNav").css("margin-top",margentop);
@@ -181,7 +181,7 @@
 
 /* Si entra en online reactivo la navegación */
 			function modoOnline() {
-				$("#deshabilitaNav").hide();
+				$("#deshabilitaNav").height(0);
 				history.back(-1);
 			}			
 			
