@@ -170,9 +170,7 @@
 				}, 1000);
 
 // Validar que se arranca con WIFI				
-				var networkState = navigator.connection.type;
-				
-				if (networkState != Connection.WIFI) {
+				if (navigator.connection.type != Connection.WIFI) {
 					$("#deshabilitaNav").show();
 					var margentop = ($(window).height() - $("#deshabilitaNav .textodeshabilitaNav").height() )/2;
 
@@ -195,9 +193,7 @@
 
 /* Si entra en online reactivo la navegación */
 			function modoOnline() {
-				var networkState = navigator.connection.type;
-				
-				if (networkState == Connection.WIFI) {
+				if (navigator.connection.type == Connection.WIFI) {
 					$("#deshabilitaNav").hide();
 					history.back(-1);
 				}
