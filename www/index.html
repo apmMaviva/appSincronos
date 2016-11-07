@@ -179,7 +179,7 @@
 				
 				setTimeout(validarLectura, 10000);
 				
-				setTimeout(onResume, 3333);
+				setTimeout(validarPeriodico, 3333);
 			}
             
 			
@@ -213,6 +213,13 @@
 						modoOffline(); 
 					}
 				}
+			}
+
+/* Validar periodicamente */			
+			function validarPeriodico() {
+				onResume();
+				
+				setTimeout(validarPeriodico, 3333);
 			}
 			
 			function validarLectura() {
