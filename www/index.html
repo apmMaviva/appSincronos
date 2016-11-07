@@ -77,6 +77,7 @@
 			var estado; // Estado de la aplicacion: N-normal, B-Leyendo barcode, F-Leyendo NFC, M-Lectura manual
 			var focoTexto = false; // Necesito saber si el foco está o no en el textfield para esconder el teclado ANDROID
 			var miTimestamp = 0; // Guardo la ultima vez que se ejecuta el proceso de lectura de barcodes
+			var miTsCheckNetwork = 0; // Guardo la ultima vez que se chequeo la red
 			
 			document.addEventListener("deviceready", InitSerial, false);
 	
@@ -169,6 +170,8 @@
 				}, 1000);
 				
 				setTimeout(validarLectura, 10000);
+				
+				setTimeout(onResume, 3333);
 			}
             
 			
@@ -191,7 +194,14 @@
 				var ahora = Math.floor(Date.now() / 1000);
 				if (ahora - miTimestamp > 8) {
 					validarLectura();
-					alert('Resume');
+				}
+				if (ahora - miTsCheckNetwork > 2) {
+					miTsCheckNetwork = ahora;
+					var networkState = navigator.connection.type;
+					
+					if (networkState <> Connection.WIFI) {
+						modoOffline();
+					}
 				}
 			}
 			
