@@ -144,7 +144,7 @@
 				
 				estado = 'N';	
 				
-				var url = "http://192.168.201.138/pistolas/login.aspx?serial=" + numSerie;
+				var url = "http://192.168.201.138/pistolas-libra/login.aspx?serial=" + numSerie;
 				var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 
 				$("#iniciobarcode").on("click", LeerBarcode);
@@ -293,7 +293,7 @@
 				estado = 'N';
 									
 //									alert("Lectura OK, " + result.text);
-				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + valor;
+				var url = 'http://192.168.201.138/pistolas-libra/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + valor;
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 				$("#varsession").html(contenido);
 //									alert("Lectura COMPLETADA");
@@ -324,7 +324,7 @@
 								}
 								else {
 																	
-									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
+									var url = 'http://192.168.201.138/pistolas-libra/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
 
@@ -390,7 +390,7 @@
 				$("#zonaNFC").hide(300);
 				$("#zonaFrame").show(300);
 				
-				var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + contenido;
+				var url = 'http://192.168.201.138/pistolas-libra/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + contenido;
 				var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 				$("#varsession").html(contenido);
 				setTimeout(validarLectura, 6000);
