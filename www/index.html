@@ -185,8 +185,12 @@
 
 /* Si entra en online reactivo la navegación */
 			function modoOnline() {
-				$("#deshabilitaNav").hide();
-				history.back(-1);
+				var networkState = navigator.connection.type;
+				
+				if (networkState == Connection.WIFI) {
+					$("#deshabilitaNav").hide();
+					history.back(-1);
+				}
 			}			
 			
 /* Si la aplicacion sale de background */			
