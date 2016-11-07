@@ -78,6 +78,7 @@
 			var focoTexto = false; // Necesito saber si el foco está o no en el textfield para esconder el teclado ANDROID
 			var miTimestamp = 0; // Guardo la ultima vez que se ejecuta el proceso de lectura de barcodes
 			var miTsCheckNetwork = 0; // Guardo la ultima vez que se chequeo la red
+			var delayLag = 0;  // Pongo este delay porque entre que se guarda en BBDD y el HTML lo detecta pasa un tiempo en el que salta la pantalla de lectura
 			
 			document.addEventListener("deviceready", InitSerial, false);
 	
@@ -235,8 +236,7 @@
 					else if (form.indexOf('ContentPlaceHolder1_alerta') > -1)   {
 						setTimeout(validarLectura, 2000);
 					}
-					else if (form.indexOf('leer-campo-android') > -1)   {
-					alert('Encuentra leer-campo-android');
+					else if ( (form.indexOf('leer-campo-android') > -1) && (delayLag==0) )   {
 						var posicion = form.indexOf('titulo-android');
 						var cad1 = form.substr(posicion,99999);
 						var p1 = cad1.indexOf('>');
@@ -253,6 +253,9 @@
 						}	
 					}	*/			
 					else {
+						if (delayLag>0) {
+							delayLag = delayLag - 1;
+						}
 						setTimeout(validarLectura, 2000);
 					}	
 				}
@@ -324,9 +327,10 @@
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
-									
+
+									estado = 'N';
+									delayLag = 2;
 									setTimeout( function() {
-										estado = 'N';
 										$('#zonaLectura').hide();
 										$("#zonaFrame").show();
 									}, 250);		
