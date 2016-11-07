@@ -168,14 +168,6 @@
 					$("#zonaNFC").hide();
 					$("#zonaImagen").hide(600);
 				}, 1000);
-
-// Validar que se arranca con WIFI				
-				if (navigator.connection.type != Connection.WIFI) {
-					$("#deshabilitaNav").show();
-					var margentop = ($(window).height() - $("#deshabilitaNav .textodeshabilitaNav").height() )/2;
-
-					$("#deshabilitaNav .textodeshabilitaNav").css("margin-top",margentop);
-				}
 				
 				setTimeout(validarLectura, 10000);
 				
@@ -193,7 +185,9 @@
 
 /* Si entra en online reactivo la navegación */
 			function modoOnline() {
-				if (navigator.connection.type == Connection.WIFI) {
+				var networkState = navigator.connection.type;
+				
+				if (networkState == Connection.WIFI) {
 					$("#deshabilitaNav").hide();
 					history.back(-1);
 				}
