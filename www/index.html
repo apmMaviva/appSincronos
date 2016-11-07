@@ -316,16 +316,16 @@
 */
 								}
 								else {
-									estado = 'N';
-									
+																	
 									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
 									$("#varsession").html(contenido);
 									
 									setTimeout( function() {
+										estado = 'N';
 										$('#zonaLectura').hide();
 										$("#zonaFrame").show();
-									}, 150);		
+									}, 250);		
 				
 									setTimeout(validarLectura, 6000);
 								} 
