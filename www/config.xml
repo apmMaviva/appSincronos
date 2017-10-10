@@ -8,7 +8,7 @@
   <!-- Target Platforms -->
     <platform name="android" />
   <!--<platform name="ios" />-->
-  <!-- /Target Platforms -->
+  <!-- /Target Platforms  -->
   
 	<allow-navigation href="*" />
     <allow-intent href="*" />
