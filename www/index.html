@@ -170,8 +170,8 @@
 					$("#zonaImagen").hide(600);
 				}, 1000);
 
-// Validar que se arranca con WIFI				
-				if (navigator.connection.type != Connection.WIFI) {
+// Validar que se arranca con RED				
+				if (navigator.connection.type != Connection.NONE) {
 					$("#deshabilitaNav").show();
 					var margentop = ($(window).height() - $("#deshabilitaNav .textodeshabilitaNav").height() )/2;
 
