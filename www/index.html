@@ -94,9 +94,9 @@
 				$('#zonaFrame').html(contenido);
 				
 /*				watchId = navigator.geolocation.watchPosition(onSuccess, onError, {maximumAge: 3000, timeout: 6000, enableHighAccuracy: false});
-				
-				setTimeout(LecturaBarcode, 6000);
 */				
+				setTimeout(LecturaBarcode, 6000);
+				
 			}
             
 // onError Callback receives a PositionError object
@@ -158,17 +158,14 @@
 				if (typeof(form) === 'undefined') {
 					setTimeout(LecturaBarcode, 3000);				
 				}
-				else if (form.indexOf('true') > -1)   {
-					LeerBarcode();
-				}
 				else {
-					setTimeout(LecturaBarcode, 3000);
-				}	
-				
+					LeerBarcode(form);
+				}
+			
 			}
 			
 /* ESCANEO BARCODE, activa el lector y  */			
-			function LeerBarcode() {
+			function LeerBarcode(redirige) {
 				
 				cordova.plugins.barcodeScanner.scan( function (result) { 
 
@@ -179,7 +176,7 @@
 									$("#varsession").html(contenido);
 //									alert("Lectura COMPLETADA");*/
 
-									var url = "https://transportes.grupomaviva.es/appviaje?serial=" + numSerie + '&barcode=CANCELADA';
+									var url = "https://sincronos.grupomaviva.es/" + redirige + "?serial=" + numSerie + '&barcode=CANCELADA';
 									var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 									
 									$('#zonaFrame').html(contenido);
@@ -193,7 +190,7 @@
 									$("#varsession").html(contenido);
 //									alert("Lectura COMPLETADA");*/
 
-									var url = "https://transportes.grupomaviva.es/appviaje?serial=" + numSerie + '&barcode=' + result.text;
+									var url = "https://sincronos.grupomaviva.es/" + redirige + "?serial=" + numSerie + '&barcode=' + result.text;
 									var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 									
 									$('#zonaFrame').html(contenido);
@@ -214,7 +211,7 @@
 
 							}, function (error) { 
 								
-								var url = "https://transportes.grupomaviva.es/appviaje?serial=" + numSerie + '&barcode=ERROR';
+								var url = "https://sincronos.grupomaviva.es/appviaje?serial=" + numSerie + '&barcode=ERROR';
 								var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 								
 								$('#zonaFrame').html(contenido);
