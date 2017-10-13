@@ -7,7 +7,7 @@
 <!-- Target Platforms -->
     <platform name="android" />
 	
-	<allow-navigation href="*" launch-external="yes" />
+	<allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*" />
 	
