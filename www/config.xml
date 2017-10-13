@@ -1,7 +1,7 @@
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.maviva.sincronos" version="1.0.0">
 	<name>Sincronos Maviva</name>
 	<description>Gestión de sincronos Maviva</description>
-	<author href="http://www.grupomaviva.es" email="informatica@grupomaviva.com">App Carros sincronos</author>
+	<author href="http://www.grupomaviva.es" email="informatica@grupomaviva.com">App Sincronos</author>
 	<content src="index.html"/>
 
 <!-- Target Platforms -->
@@ -16,7 +16,6 @@
     <gap:plugin name="cordova-plugin-geolocation" source="npm"/>
 	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
 	<gap:plugin name="cordova-plugin-whitelist" source="npm"/>
-	<gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
 <!-- OBSOLETO?
     <feature name="debug-server" required="true">
        <param name="domain" value="http://debug.phonegap.com"/>
@@ -28,7 +27,7 @@
 	<feature name="Notification"><param name="android-package" value="org.apache.cordova.dialogs.Notification" /></feature>	
 	<feature name="InAppBrowser"><param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" /></feature>
 -->
-    <preference name="phonegap-version" value="cli-6.5.0" />
+    <preference name="phonegap-version" value="cli-6.3.0" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
     <preference name="webviewbounce"    value="false" />
