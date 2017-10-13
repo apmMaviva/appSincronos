@@ -146,13 +146,16 @@
 				
 				var url = "https://sincronos.grupomaviva.es/applogin?serial=" + numSerie;
 				var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
-
+				$('#zonaFrame').html(contenido);
+					
+					
+/*
 				$("#iniciobarcode").on("click", LeerBarcode);
 
 				$("#inicionfc").on("click", LeerNFC);
 
 				$("#confirmar").on("click", ConfirmaLecturaManual);				
-				
+*/				
 				$("#textoinput input").focusin(function() {
 					focoTexto = true; 
 				});
@@ -164,14 +167,13 @@
 				setTimeout( function(){	
 					$("#deshabilitaNav").hide();
 					$("#deshabilitaNav").css('top',0);
-					$('#zonaFrame').html(contenido);
 					$("#zonaLectura").hide();
 					$("#zonaNFC").hide();
 					$("#zonaImagen").hide(600);
 				}, 1000);
 
 // Validar que se arranca con RED				
-				if (navigator.connection.type != Connection.NONE) {
+/*				if (navigator.connection.type != Connection.NONE) {
 					$("#deshabilitaNav").show();
 					var margentop = ($(window).height() - $("#deshabilitaNav .textodeshabilitaNav").height() )/2;
 
@@ -180,7 +182,7 @@
 				
 				setTimeout(validarLectura, 10000);
 				
-				setTimeout(validarPeriodico, 3333);
+				setTimeout(validarPeriodico, 3333);*/
 			}
             
 			
