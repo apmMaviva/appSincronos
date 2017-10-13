@@ -1,31 +1,33 @@
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.maviva.apppistolas" version="1.0.0">
-
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" id="com.maviva.sincronos" version="1.0.0">
 	<name>Sincronos Maviva</name>
-	<description>Aplicacion Sincronos Maviva</description>
-	<author href="http://www.grupomaviva.es" email="informatica@grupomaviva.es">App Sincronos</author>
+	<description>Gestión de sincronos Maviva</description>
+	<author href="http://www.grupomaviva.es" email="informatica@grupomaviva.com">App Carros sincronos</author>
 	<content src="index.html"/>
 
-  <!-- Target Platforms -->
+<!-- Target Platforms -->
     <platform name="android" />
-  <!--<platform name="ios" />-->
-  <!-- /Target Platforms  -->
-  
+	
 	<allow-navigation href="*" />
     <allow-intent href="*" />
     <access origin="*" />
 	
-	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
 	<gap:plugin name="cordova-plugin-dialogs" source="npm"/>
 	<gap:plugin name="cordova-plugin-device" source="npm"/>
-	<gap:plugin name="cordova-plugin-network-information" source="npm"/>
-	<gap:plugin name="phonegap-nfc" source="npm"/>
+    <gap:plugin name="cordova-plugin-geolocation" source="npm"/>
+	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
 	<gap:plugin name="cordova-plugin-whitelist" source="npm"/>
 <!-- OBSOLETO?
-    <feature name="http://api.phonegap.com/1.0/device" />
+    <feature name="debug-server" required="true">
+       <param name="domain" value="http://debug.phonegap.com"/>
+       <param name="key" value="willoughby"/>
+    </feature>
+	<feature name="Device">
+		<param name="android-package" value="org.apache.cordova.device.Device" />
+	</feature>	
 	<feature name="Notification"><param name="android-package" value="org.apache.cordova.dialogs.Notification" /></feature>	
 	<feature name="InAppBrowser"><param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" /></feature>
 -->
-    <preference name="phonegap-version" value="cli-6.5.0" />
+    <preference name="phonegap-version" value="cli-6.3.0" />
     <preference name="target-device"    value="universal" />
     <preference name="fullscreen"       value="false" />
     <preference name="webviewbounce"    value="false" />
@@ -43,7 +45,7 @@
     <icon src="res/icon/ios/icon-72.png"            gap:platform="ios"        width="72" height="72" />
     <icon src="res/icon/ios/icon-57-2x.png"         gap:platform="ios"        width="114" height="114" />
     <icon src="res/icon/ios/icon-72-2x.png"         gap:platform="ios"        width="144" height="144" />
-    <icon src="res/icon/ios/icon-180.png"           gap:platform="ios"        width="180" height="180" />
+    <icon src="res/icon/ios/icon-180.png"         gap:platform="ios"        width="180" height="180" />
     <icon src="res/icon/webos/icon-64.png"          gap:platform="webos" />
     <icon src="res/icon/windows-phone/icon-48.png"  gap:platform="winphone" />
     <icon src="res/icon/windows-phone/icon-173.png" gap:platform="winphone"   gap:role="background" />
