@@ -16,6 +16,7 @@
     <gap:plugin name="cordova-plugin-geolocation" source="npm"/>
 	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
 	<gap:plugin name="cordova-plugin-whitelist" source="npm"/>
+	<gap:plugin name="cordova-plugin-inappbrowser" source="npm"/>
 <!-- OBSOLETO?
     <feature name="debug-server" required="true">
        <param name="domain" value="http://debug.phonegap.com"/>
