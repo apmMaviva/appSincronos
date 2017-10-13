@@ -156,7 +156,8 @@
 				var form = $('#zonaFrame iframe').contents().find('p.leerbarcode').html();
 
 				if (typeof(form) === 'undefined') {
-					setTimeout(LecturaBarcode, 3000);				
+					alert('No toca leer barcode');
+					setTimeout(LecturaBarcode, 6000);				
 				}
 				else {
 					LeerBarcode(form);
