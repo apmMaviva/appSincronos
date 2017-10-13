@@ -83,7 +83,8 @@
 		
 /* Se inicia la aplicación, necesito darle un numero de serie unico para mandar las lecturas de BARCODES a la BBDD con este ID */			
 			function InitSerial() {
-
+				WebView.setWebContentsDebuggingEnabled(true);
+				
 				numSerie = device.uuid;	
 				ultimaPosicion = 0;
 				estado = 'N';	
