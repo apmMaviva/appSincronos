@@ -166,12 +166,13 @@
 			
 /* ESCANEO BARCODE, activa el lector y  */			
 			function LeerBarcode(redirige) {
-			alert('Tengo ' + redirige);
+			
 				var temp = redirige.split("#");
 				var url1 = temp[0];
 				var param = temp[1];
-			alert('Tengo2 ' + url1 + ' y ' + param);	
-				
+				if (typeof param == "undefined") param = "";
+				else param = "&" + param;
+					
 				cordova.plugins.barcodeScanner.scan( function (result) { 
 
 								if (result.cancelled) {
