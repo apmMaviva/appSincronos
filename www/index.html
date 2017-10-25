@@ -167,6 +167,9 @@
 /* ESCANEO BARCODE, activa el lector y  */			
 			function LeerBarcode(redirige) {
 				
+				var url = redirige.split("#")[0];
+				var param = redirige.split("#")[1];
+				
 				cordova.plugins.barcodeScanner.scan( function (result) { 
 
 								if (result.cancelled) {
@@ -176,7 +179,7 @@
 									$("#varsession").html(contenido);
 //									alert("Lectura COMPLETADA");*/
 
-									var url = "https://sincronos.grupomaviva.es/" + redirige + "?serial=" + numSerie + '&barcode=CANCELADA';
+									var url = "https://sincronos.grupomaviva.es/" + url + "?serial=" + numSerie + '&barcode=CANCELADA' + param;
 									var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 									
 									$('#zonaFrame').html(contenido);
@@ -190,7 +193,7 @@
 									$("#varsession").html(contenido);
 //									alert("Lectura COMPLETADA");*/
 
-									var url = "https://sincronos.grupomaviva.es/" + redirige + "?serial=" + numSerie + '&barcode=' + result.text;
+									var url = "https://sincronos.grupomaviva.es/" + url + "?serial=" + numSerie + '&barcode=' + result.text + param;
 									var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 									
 									$('#zonaFrame').html(contenido);
@@ -211,7 +214,7 @@
 
 							}, function (error) { 
 								
-								var url = "https://sincronos.grupomaviva.es/" + redirige + "?serial=" + numSerie + '&barcode=ERROR';
+								var url = "https://sincronos.grupomaviva.es/" + url + "?serial=" + numSerie + '&barcode=ERROR' + param;
 								var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 								
 								$('#zonaFrame').html(contenido);
