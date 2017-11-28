@@ -156,7 +156,7 @@
 				var form = $('#zonaFrame iframe').contents().find('p.leerbarcode').html();
 
 				if (typeof(form) === 'undefined') {
-					setTimeout(LecturaBarcode, 2000);				
+					setTimeout(LecturaBarcode, 1000);				
 				}
 				else {
 					LeerBarcode(form);
@@ -187,7 +187,7 @@
 									
 									$('#zonaFrame').html(contenido);
 
-									setTimeout(LecturaBarcode, 6000);
+									setTimeout(LecturaBarcode, 3000);
 								}
 								else {
 //									alert("Lectura OK, " + result.text);
@@ -201,7 +201,7 @@
 									
 									$('#zonaFrame').html(contenido);
 									
-									setTimeout(LecturaBarcode, 6000);
+									setTimeout(LecturaBarcode, 3000);
 								} 
 
 								/*
@@ -235,7 +235,7 @@
 
 				var diferencia2 = Math.round((timeStamp - ultimaLectura)/1000); //Tiempo en segundos
 				
-				if (diferencia2 > 15) { 
+				if (diferencia2 > 9) { 
 					LecturaBarcode();
 				}
 			}			
