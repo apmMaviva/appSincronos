@@ -156,7 +156,7 @@
 				var form = $('#zonaFrame iframe').contents().find('p.leerbarcode').html();
 
 				if (typeof(form) === 'undefined') {
-					setTimeout(LecturaBarcode, 1500);				
+					setTimeout(LecturaBarcode, 2000);				
 				}
 				else {
 					LeerBarcode(form);
@@ -235,7 +235,7 @@
 
 				var diferencia2 = Math.round((timeStamp - ultimaLectura)/1000); //Tiempo en segundos
 				
-				if (diferencia2 > 9) { 
+				if (diferencia2 > 15) { 
 					LecturaBarcode();
 				}
 			}			
