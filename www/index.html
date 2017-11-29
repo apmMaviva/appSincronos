@@ -176,34 +176,34 @@
 					
 				cordova.plugins.barcodeScanner.scan( function (result) { 
 
-								if (result.cancelled) {
-//									alert("Lectura CANCELADA");
-/*									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=CANCELADA';
-									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-									$("#varsession").html(contenido);
-//									alert("Lectura COMPLETADA");*/
+							if (result.cancelled) {
+								alert("Lectura CANCELADA");
+/*								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=CANCELADA';
+								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
+								$("#varsession").html(contenido);
+//								alert("Lectura COMPLETADA");*/
 
-									var url = "https://sincronos.grupomaviva.es/" + url1 + "?serial=" + numSerie + '&barcode=CANCELADA' + param;
-									var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
+								var url = "https://sincronos.grupomaviva.es/" + url1 + "?serial=" + numSerie + '&barcode=CANCELADA' + param;
+								var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 									
-									$('#zonaFrame').html(contenido);
+								$('#zonaFrame').html(contenido);
 
-									setTimeout(LecturaBarcode, 3000);
-								}
-								else {
-//									alert("Lectura OK, " + result.text);
-/*									var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
-									var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
-									$("#varsession").html(contenido);
-//									alert("Lectura COMPLETADA");*/
+								setTimeout(LecturaBarcode, 3000);
+							}
+							else {
+								alert("Lectura OK, " + result.text);
+/*								var url = 'http://192.168.201.138/pistolas/guardabarcode.aspx?serial=' + numSerie + '&barcode=' + result.text;
+								var contenido = '<iframe frameborder="0" style="width:0%;height:0%;" src="' + url + '">No funciona si se ve esto</iframe>';
+								$("#varsession").html(contenido);
+//								alert("Lectura COMPLETADA");*/
 
-									var url = "https://sincronos.grupomaviva.es/" + url1 + "?serial=" + numSerie + '&barcode=' + result.text + param;
-									var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
+								var url = "https://sincronos.grupomaviva.es/" + url1 + "?serial=" + numSerie + '&barcode=' + result.text + param;
+								var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 									
-									$('#zonaFrame').html(contenido);
+								$('#zonaFrame').html(contenido);
 									
-									setTimeout(LecturaBarcode, 3000);
-								} 
+								setTimeout(LecturaBarcode, 3000);
+							} 
 
 								/*
 								alert("We got a barcode\n" + 
@@ -216,15 +216,16 @@
 								}
 								*/
 
-							}, function (error) { 
+					}, function (error) { 
+							alert("Lectura con ERROR: " + error);
+							
+							var url = "https://sincronos.grupomaviva.es/" + url1 + "?serial=" + numSerie + '&barcode=ERROR' + param;
+							var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
 								
-								var url = "https://sincronos.grupomaviva.es/" + url1 + "?serial=" + numSerie + '&barcode=ERROR' + param;
-								var contenido = '<iframe frameborder="0" style="width:99%!important;height:99%!important;margin:0.5%!important;padding:0!important;overflow:hidden;" src="' + url + '">No funciona si se ve esto</iframe>';
-								
-								$('#zonaFrame').html(contenido);
-								
-								setTimeout(validarLectura, 6000);		
-							} );	
+							$('#zonaFrame').html(contenido);
+							
+							setTimeout(validarLectura, 6000);		
+					} );	
 
 			}
 
