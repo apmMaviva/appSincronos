@@ -14,7 +14,9 @@
 	<gap:plugin name="cordova-plugin-dialogs" source="npm"/>
 	<gap:plugin name="cordova-plugin-device" source="npm"/>
 <!--    <gap:plugin name="cordova-plugin-geolocation" source="npm"/>-->
-	<gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
+	<gap:plugin name="phonegap-plugin-barcodescanner" spec="^6.0.8">
+		<variable name="CAMERA_USAGE_DESCRIPTION" value="Scan QR Codes" />
+	</gap:plugin>
 	<gap:plugin name="cordova-plugin-whitelist" source="npm"/>
 <!-- OBSOLETO?
     <feature name="debug-server" required="true">
